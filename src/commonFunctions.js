@@ -6,6 +6,8 @@ import { awsConfig } from './aws-exports';
 import moment from 'moment';
 import semver from 'semver';
 
+import axios from 'axios';
+
 
 import { store } from './redux/store';
 import authActions from '@iso/redux/auth/actions';
@@ -17,7 +19,15 @@ export const getData = async () => {
   //const [firstLoad, setFirstLoad] = useState(false);
 
   const blockTime = 6 //6 seconds Need to calc this properly
-  const val = await API.get('MyAWSApi', '');
+  // const val = await API.get('MyAWSApi', '');
+  // const val = prodData;
+  var val = {};
+  try {
+    const res = await fetch("https://api.liquify.com/thor/api/grabData");
+    val = await res.json();
+  } catch (error) {
+    val = {};
+  }
 
   if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
       console.log('DEV ONLY: Raw getData API Call Results: ', val)
@@ -116,8 +126,8 @@ export const getData = async () => {
 }
 
 export const refreshData = async () => {
+  return false
 
-  apiCall('getUserData')
   .then(results => {
     store.dispatch(authActions.saveData(results))
 
