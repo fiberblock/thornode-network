@@ -1,0 +1,76 @@
+name: CI
+
+on:
+  release:
+    types:
+      - published
+  push:
+    branches:
+      - main
+      - new-ui
+    paths-ignore:
+      - .github/workflows/*
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16.x'
+
+    - name: Cache node modules
+      uses: actions/cache@v2
+      id: yarn-cache
+      with:
+        path: |
+          node_modules
+        key: ${{ runner.os }}-yarn-lock-${{ hashFiles('**/yarn.lock') }}
+        restore-keys: ${{ runner.os }}-yarn-
+
+    - name: Install dependencies
+      run: yarn
+
+#     - name: Setup env for Development environment
+#       if: github.ref == 'refs/heads/main'
+#       run: cp .env.dev .env
+
+#     - name: Setup env for PRE-RELEASE environment
+#       if: github.event.action == 'published' && github.event.release.prerelease == true
+#       run: cp .env.pre .env
+
+#     - name: Setup env for PRODUCTION environment
+#       if: github.event.action == 'published' && github.event.release.prerelease == false
+#       run: cp .env.prod .env
+
+    - name: Build
+      run: yarn build
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
+
+    - name: Deploy static site from main branch to DEVELOPMENT S3 bucket
+      if: github.ref == 'refs/heads/new-ui'
+      run: |
+        echo "DEVELOPMENT"
+        aws s3 sync ./dist/ s3://${{ secrets.DEV_APP_BUCKET }} --delete --cache-control 'max-age=604800' --exclude 'index.html'
+        aws s3 cp ./dist/index.html s3://${{ secrets.DEV_APP_BUCKET }}/index.html --cache-control 'no-cache'
+        aws cloudfront create-invalidation --distribution-id ${{ secrets.DEV_APP_DISTRIBUTION_ID }} --paths '/*'
+    
+    - name: Deploy static site from release to PRODUCTION S3 bucket
+      if: github.event.action == 'published' && github.event.release.prerelease == false
+      run: |
+        echo "PRODUCTION"
+        aws s3 sync ./dist/ s3://${{ secrets.PROD_APP_BUCKET }} --delete --cache-control 'max-age=604800' --exclude 'index.html'
+        aws s3 cp ./dist/index.html s3://${{ secrets.PROD_APP_BUCKET }}/index.html --cache-control 'no-cache'
+        aws cloudfront create-invalidation --distribution-id ${{ secrets.PROD_APP_DISTRIBUTION_ID }} --paths '/*'
