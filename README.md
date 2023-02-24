@@ -1,6 +1,5 @@
 # Thornode Monitor
 
-
 There are several moving parts to this dashboard
 
 1) Front end:
