@@ -50,7 +50,7 @@ jobs:
 #       run: cp .env.prod .env
 
     - name: Build
-      run: yarn build
+      run: CI=false yarn build
 
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
@@ -63,8 +63,8 @@ jobs:
       if: github.ref == 'refs/heads/new-ui'
       run: |
         echo "DEVELOPMENT"
-        aws s3 sync ./dist/ s3://${{ secrets.DEV_APP_BUCKET }} --delete --cache-control 'max-age=604800' --exclude 'index.html'
-        aws s3 cp ./dist/index.html s3://${{ secrets.DEV_APP_BUCKET }}/index.html --cache-control 'no-cache'
+        aws s3 sync ./build/ s3://${{ secrets.DEV_APP_BUCKET }} --delete --cache-control 'max-age=604800' --exclude 'index.html'
+        aws s3 cp ./build/index.html s3://${{ secrets.DEV_APP_BUCKET }}/index.html --cache-control 'no-cache'
         aws cloudfront create-invalidation --distribution-id ${{ secrets.DEV_APP_DISTRIBUTION_ID }} --paths '/*'
     
     - name: Deploy static site from release to PRODUCTION S3 bucket
