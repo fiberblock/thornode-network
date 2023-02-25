@@ -477,13 +477,13 @@ tr:first-child {
   letter-spacing: -0.01em;
   color: #7E7E7E;
 }
-.feedback-modal .ant-modal-bodyy   {
+.feedback-modal .ant-modal-body  {
   padding: 36px 30px;
 }
 .feedback-modal .ant-modal-confirm-body .ant-modal-confirm-content strong  {
   font-weight: 600;
 }
-.feedback-modal .ant-modal-confirm .ant-modal-confirm-btns  {
+.feedback-modal.ant-modal-confirm .ant-modal-confirm-btns  {
   margin: 18px auto 0;
   text-align: center;
   float: none;
