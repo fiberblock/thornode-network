@@ -90,6 +90,10 @@ function VisibleColumn({ initialConfig, onConfigUpdate }) {
             <span>RPC</span>
             <Switch checked={config.rpc} onChange={(checked) => handleConfigChange('rpc', checked)} />
           </div>
+          <div className='filter-item'>
+            <span>BFR</span>
+            <Switch checked={config.bfr} onChange={(checked) => handleConfigChange('bfr', checked)} />
+          </div>
         </div>
       </Modal>
 

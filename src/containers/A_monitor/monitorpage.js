@@ -66,6 +66,7 @@ const { Header, Footer, Content } = Layout;
 
 const headerStyle = {cursor: 'pointer', padding: '12px 15px', fontSize: 15, color: '#ffffff', backgroundColor: 'rgba(24, 34, 51, 0.4)', height: 55, fontWeight: 600}
 const tdStyle = {minWidth: 60, textAlign: 'right', fontSize: 14, padding: '10px 15px'}
+const trStyle = {height: 45}
 const iconStyle = {minWidth: 25, padding: 5, paddingLeft: 10, paddingRight: 10}
 
 
@@ -282,7 +283,7 @@ const ReturnIspImage = ({isp}) => {
     return <img alt="#" src={imageVULTR} style={style}/>
   }
 
-
+  
   return '-'
 }
 
@@ -378,6 +379,7 @@ const NodeTable = ({nodeData, clickSortHeader, sortColour, maxChainHeights, chai
           <th className={getHeaderClassName('score')} style={{...headerStyle, color: sortColour('score')}}><span onClick={()=>clickSortHeader('score')}>Score</span></th>
           <th className={getHeaderClassName('version')} style={{...headerStyle, color: sortColour('version')}}><span onClick={()=>clickSortHeader('version')}>Version</span></th>
           <th className={getHeaderClassName('rpc')} style={{...headerStyle, textAlign: 'center'}}>RPC</th>
+          <th className={getHeaderClassName('bfr')} style={{...headerStyle, textAlign: 'center'}}>BFR</th>
 
           {chains &&
             <>
@@ -394,8 +396,8 @@ const NodeTable = ({nodeData, clickSortHeader, sortColour, maxChainHeights, chai
       </thead>
       <tbody>
       {currentItems.map((item, index) => (
-        <tr key={index}>
-          <td className={getCellClassName('nodes')} style={{...tdStyle, textAlign: 'left', minWidth: 140}}>
+        <tr key={index} style={{...trStyle}}>
+          <td className={getCellClassName('nodes')} style={{...tdStyle, textAlign: 'left', width: 220}}>
             <Popover
               content={item.node_address}
               title={'Thornode Address'}
@@ -409,7 +411,15 @@ const NodeTable = ({nodeData, clickSortHeader, sortColour, maxChainHeights, chai
           </td>
           <td className={getCellClassName('age')} style={{...tdStyle, textAlign: 'left'}}>{item.age.toFixed(2)}</td>
           <td className={getCellClassName('action')} style={{...tdStyle, textAlign: 'center', fontSize: 12}}>{item.action}</td>
-          <td className={getCellClassName('isp')} style={{...tdStyle, textAlign: 'center'}}><ReturnIspImage isp={item.isp}/></td>
+          <td className={getCellClassName('isp')} style={{...tdStyle, textAlign: 'center'}}>
+            <Popover
+              content={item.isp}
+              title={'Provider'}
+              trigger="hover"
+            >
+              <span style={{cursor: 'pointer'}}><ReturnIspImage isp={item.isp}/></span>
+            </Popover>
+          </td>
           <td style={{...tdStyle, textAlign: 'left', fontSize: 12}}>{item.location}</td>
           <td className={getCellClassName('bond')} style={tdStyle}>ᚱ{parseInt((item.bond/100000000).toFixed()).toLocaleString()}</td>
           <td className={getCellClassName('providers')} style={{...tdStyle, textAlign: 'center'}}> <Popover
@@ -424,7 +434,9 @@ const NodeTable = ({nodeData, clickSortHeader, sortColour, maxChainHeights, chai
           <td className={getCellClassName('slashes')} style={{...tdStyle, textAlign: 'center'}}>{parseInt(item.slash_points).toLocaleString()}</td>
           <td className={getCellClassName('score')} style={tdStyle}>{item.score}</td>
           <td className={getCellClassName('version')} style={tdStyle}>{item.version}</td>
-          <td className={getCellClassName('rpc')} style={{...tdStyle, textAlign: 'center'}}><a style={{color: 'rgba(0,0,0,0.85)'}} href={`http://${item.ip_address}:27147/health?`} target="_blank" rel="noopener noreferrer">{item.rpc === 'true' ? '*' : 'BAD'}</a></td>
+          {/* <td className={getCellClassName('rpc')} style={{...tdStyle, textAlign: 'center'}}><a style={{color: 'rgba(0,0,0,0.85)'}} href={`http://${item.ip_address}:27147/health?`} target="_blank" rel="noopener noreferrer">{item.rpc === 'true' ? '*' : 'BAD'}</a></td> */}
+          <td className={getCellClassName('rpc')} style={{...tdStyle, textAlign: 'center'}}><a style={{color: 'rgba(0,0,0,0.85)'}} href={`http://${item.ip_address}:27147/health?`} target="_blank" rel="noopener noreferrer">{item.rpc !== null ? '*' : 'BAD'}</a></td>
+          <td className={getCellClassName('bfr')} style={{...tdStyle, textAlign: 'center'}}><a style={{color: 'rgba(0,0,0,0.85)'}} href={`http://${item.ip_address}:6040/p2pid`} target="_blank" rel="noopener noreferrer">{item.bifrost !== null ? '*' : 'BAD' }</a></td>
 
           {chains &&
             <>
@@ -468,6 +480,7 @@ const defaulColumns = {
     score: true,
     version: true,
     rpc: true,
+    bfr: true,
   }
 export default class extends Component {
 
@@ -813,9 +826,36 @@ We use string sort function if value is one of the arrays else do second sort nu
           <span>Thornode Monitor</span>
         </div>
         <div className='header-right'>
-          <div className={`active-node ${nodesFilter.active ? "active-node--active" : null}`} onClick={()=>this.onNodesFilter('active')}><img src={activeIcon}/></div>
+          {/* <div className={`active-node ${nodesFilter.active ? "active-node--active" : null}`} onClick={()=>this.onNodesFilter('active')}><img src={activeIcon}/></div>
           <div className={`active-node ${nodesFilter.standby ? "active-node--active" : null}`} onClick={()=>this.onNodesFilter('standby')}><img src={powerIcon}/></div>
-          <div className={`active-node ${nodesFilter.orthers ? "active-node--active" : null}`} onClick={()=>this.onNodesFilter('orthers')}><img src={threeDotsIcon}/></div>
+          <div className={`active-node ${nodesFilter.orthers ? "active-node--active" : null}`} onClick={()=>this.onNodesFilter('orthers')}><img src={threeDotsIcon}/></div> */}
+          <div className={`active-node ${nodesFilter.active ? "active-node--active" : null}`} onClick={()=>this.onNodesFilter('active')}>
+            <Popover
+              content='Active nodes'
+              title={'Filter by'}
+              trigger="hover"
+            >
+              <img src={activeIcon}/>
+            </Popover>
+          </div>
+          <div className={`active-node ${nodesFilter.standby ? "active-node--active" : null}`} onClick={()=>this.onNodesFilter('standby')}>
+          <Popover
+              content='Standby nodes'
+              title={'Filter by'}
+              trigger="hover"
+            >
+              <img src={powerIcon}/>
+            </Popover>
+          </div>
+          <div className={`active-node ${nodesFilter.orthers ? "active-node--active" : null}`} onClick={()=>this.onNodesFilter('orthers')}>
+            <Popover
+              content='Orther nodes'
+              title={'Filter by'}
+              trigger="hover"
+            >
+              <img src={threeDotsIcon}/>
+            </Popover>
+          </div>
         </div>
         
       </Header>
