@@ -367,10 +367,10 @@ const NodeTable = ({nodeData, clickSortHeader, sortColour, maxChainHeights, chai
       <thead>
         <tr style={{borderStyle: 'solid', borderWidth: 1.1, borderColor: 'rgba(0,0,0,1)', color: 'black', textAlign: 'right', marginRight: 10}}>
           <th className={getHeaderClassName('nodes')} style={{...headerStyle, color: sortColour('node_address'), textAlign: 'left', minWidth: 120}}><span onClick={()=>clickSortHeader('node_address')}>Validator Nodes</span></th>
-          <th className={getHeaderClassName('age')} style={{...headerStyle, color: sortColour('age'), textAlign: 'left'}}><span onClick={()=>clickSortHeader('age')}>Age</span></th>
-          <th className={getHeaderClassName('action')} style={{...headerStyle, color: sortColour('action'), textAlign: 'center', minWidth: 100}}><span onClick={()=>clickSortHeader('action')}>Action</span></th>
+          <th className={getHeaderClassName('age')} style={{...headerStyle, color: sortColour('age'), textAlign: 'left', minWidth: 90}}><span onClick={()=>clickSortHeader('age')}>Age</span></th>
+          <th className={getHeaderClassName('action')} style={{...headerStyle, color: sortColour('action'), textAlign: 'center', minWidth: 145}}><span onClick={()=>clickSortHeader('action')}>Action</span></th>
           <th className={getHeaderClassName('isp')} style={{...headerStyle, color: sortColour('isp'), textAlign: 'center', minWidth: 50}}><span onClick={()=>clickSortHeader('isp')}>ISP</span></th>
-          <th className="tableHeader" style={{...headerStyle, color: sortColour('location'), textAlign: 'left', minWidth: 100}}><span onClick={()=>clickSortHeader('location')}>Location</span></th>
+          <th className="tableHeader" style={{...headerStyle, color: sortColour('location'), textAlign: 'left', minWidth: 185}}><span onClick={()=>clickSortHeader('location')}>Location</span></th>
           <th className={getHeaderClassName('bond')} style={{...headerStyle, color: sortColour('bond'), minWidth: 90}}><span onClick={()=>clickSortHeader('bond')}>Bond</span></th>
           <th className={getHeaderClassName('providers')} style={{...headerStyle, color: sortColour('bond_providers'), textAlign: 'center', minWidth: 110}}><span onClick={()=>clickSortHeader('bond_providers')}>Providers</span></th>
           <th className={getHeaderClassName('rewards')} style={{...headerStyle, color: sortColour('current_award'), textAlign: 'left'}}><span onClick={()=>clickSortHeader('current_award')}>Rewards</span></th>
@@ -435,8 +435,8 @@ const NodeTable = ({nodeData, clickSortHeader, sortColour, maxChainHeights, chai
           <td className={getCellClassName('score')} style={tdStyle}>{item.score}</td>
           <td className={getCellClassName('version')} style={tdStyle}>{item.version}</td>
           {/* <td className={getCellClassName('rpc')} style={{...tdStyle, textAlign: 'center'}}><a style={{color: 'rgba(0,0,0,0.85)'}} href={`http://${item.ip_address}:27147/health?`} target="_blank" rel="noopener noreferrer">{item.rpc === 'true' ? '*' : 'BAD'}</a></td> */}
-          <td className={getCellClassName('rpc')} style={{...tdStyle, textAlign: 'center'}}><a style={{color: 'rgba(0,0,0,0.85)'}} href={`http://${item.ip_address}:27147/health?`} target="_blank" rel="noopener noreferrer">{item.rpc !== null ? '*' : 'BAD'}</a></td>
-          <td className={getCellClassName('bfr')} style={{...tdStyle, textAlign: 'center'}}><a style={{color: 'rgba(0,0,0,0.85)'}} href={`http://${item.ip_address}:6040/p2pid`} target="_blank" rel="noopener noreferrer">{item.bifrost !== null ? '*' : 'BAD' }</a></td>
+          <td className={getCellClassName('rpc')} style={{...tdStyle, textAlign: 'center'}}><a style={{color: 'rgba(0,0,0,0.85)'}} href={`http://${item.ip_address}:27147/health?`} target="_blank" rel="noopener noreferrer">{item.rpc !== null ? '*' : 'Bad'}</a></td>
+          <td className={getCellClassName('bfr')} style={{...tdStyle, textAlign: 'center'}}><a style={{color: 'rgba(0,0,0,0.85)'}} href={`http://${item.ip_address}:6040/p2pid`} target="_blank" rel="noopener noreferrer">{item.bifrost !== null ? '*' : 'Bad' }</a></td>
 
           {chains &&
             <>
