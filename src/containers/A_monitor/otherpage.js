@@ -351,7 +351,7 @@ const NodeTable = ({nodeData, clickSortHeader, sortColour, maxChainHeights, chai
           <th className={getHeaderClassName('age')} style={{...headerStyle, color: sortColour('age'), textAlign: 'left', minWidth: 90}}><span onClick={()=>clickSortHeader('age')}>Age</span></th>
           <th className={getHeaderClassName('action')} style={{...headerStyle, color: sortColour('action'), textAlign: 'center', minWidth: 145}}><span onClick={()=>clickSortHeader('action')}>Action</span></th>
           <th className={getHeaderClassName('isp')} style={{...headerStyle, color: sortColour('isp'), textAlign: 'center', minWidth: 50}}><span onClick={()=>clickSortHeader('isp')}>ISP</span></th>
-          <th className="tableHeader" style={{...headerStyle, color: sortColour('location'), textAlign: 'left', minWidth: 185}}><span onClick={()=>clickSortHeader('location')}>Location</span></th>
+          <th className="tableHeader" style={{...headerStyle, color: sortColour('location'), textAlign: 'left', minWidth: 160}}><span onClick={()=>clickSortHeader('location')}>Location</span></th>
           <th className={getHeaderClassName('bond')} style={{...headerStyle, color: sortColour('bond'), minWidth: 90}}><span onClick={()=>clickSortHeader('bond')}>Bond</span></th>
           <th className={getHeaderClassName('providers')} style={{...headerStyle, color: sortColour('bond_providers'), textAlign: 'center', minWidth: 110}}><span onClick={()=>clickSortHeader('bond_providers')}>Providers</span></th>
           <th className={getHeaderClassName('rewards')} style={{...headerStyle, color: sortColour('current_award'), textAlign: 'left'}}><span onClick={()=>clickSortHeader('current_award')}>Rewards</span></th>
