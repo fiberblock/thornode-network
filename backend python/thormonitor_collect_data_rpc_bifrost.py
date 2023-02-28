@@ -7,6 +7,11 @@ import time
 from threading import Thread
 
 def requestThread(data, Queue):
+    """
+        requestThread thread to grab p2p id and health of a given node
+        :param data: node to grab info for
+        :param Queue: queue to push output too
+    """
     if data['ip_address'] != '':
         bifrostURL = "http://" + data['ip_address'] + ":6040/p2pid"
         healthUrl = "http://" + data['ip_address'] + ":27147/health?"
@@ -29,6 +34,9 @@ def requestThread(data, Queue):
 
 
 def biFrostGrabDataAndSaveToDB():
+    """
+        biFrostGrabDataAndSaveToDB used to update rpc and bifrost info in thornode_monitor
+    """
     responseQueue = Queue()
     currentDBData = (grabQuery('SELECT * FROM noderunner.thornode_monitor'))
     fullAddrList = [x['node_address'] for x in currentDBData]
@@ -66,6 +74,8 @@ def biFrostGrabDataAndSaveToDB():
 
             commitQuery(query)
 
+    # Collect a list of all node which have been missed in the queue, this indicates that there were errors pulling the data
+    # inside the thread so report any missing as null
     newList = list(set(fullAddrList).symmetric_difference(set(currentAddrList)))
 
     for node in newList:
