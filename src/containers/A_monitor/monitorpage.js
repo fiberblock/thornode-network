@@ -435,8 +435,8 @@ const NodeTable = ({nodeData, clickSortHeader, sortColour, maxChainHeights, chai
           <td className={getCellClassName('score')} style={tdStyle}>{item.score}</td>
           <td className={getCellClassName('version')} style={tdStyle}>{item.version}</td>
           {/* <td className={getCellClassName('rpc')} style={{...tdStyle, textAlign: 'center'}}><a style={{color: 'rgba(0,0,0,0.85)'}} href={`http://${item.ip_address}:27147/health?`} target="_blank" rel="noopener noreferrer">{item.rpc === 'true' ? '*' : 'BAD'}</a></td> */}
-          <td className={getCellClassName('rpc')} style={{...tdStyle, textAlign: 'center'}}><a style={{color: 'rgba(0,0,0,0.85)'}} href={`http://${item.ip_address}:27147/health?`} target="_blank" rel="noopener noreferrer">{item.rpc !== null ? 'Good' : 'Bad'}</a></td>
-          <td className={getCellClassName('bfr')} style={{...tdStyle, textAlign: 'center'}}><a style={{color: 'rgba(0,0,0,0.85)'}} href={`http://${item.ip_address}:6040/p2pid`} target="_blank" rel="noopener noreferrer">{item.bifrost !== null ? 'Good' : 'Bad' }</a></td>
+          <td className={getCellClassName('rpc')} style={{...tdStyle, textAlign: 'center'}}><a style={{color: 'rgba(0,0,0,0.85)'}} href={`http://${item.ip_address}:27147/health?`} target="_blank" rel="noopener noreferrer">{item.rpc !== "null" ? 'Good' : 'Bad'}</a></td>
+          <td className={getCellClassName('bfr')} style={{...tdStyle, textAlign: 'center'}}><a style={{color: 'rgba(0,0,0,0.85)'}} href={`http://${item.ip_address}:6040/p2pid`} target="_blank" rel="noopener noreferrer">{item.bifrost !== "null" ? 'Good' : 'Bad' }</a></td>
 
           {chains &&
             <>

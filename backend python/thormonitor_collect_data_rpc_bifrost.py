@@ -7,12 +7,6 @@ import time
 from threading import Thread
 
 def requestThread(data, Queue):
-    """
-    requestThread thread to grab p2p id and health of a given node
-
-    :param data: node to grab info for
-    :param Queue: queue to push output too
-    """
     if data['ip_address'] != '':
         bifrostURL = "http://" + data['ip_address'] + ":6040/p2pid"
         healthUrl = "http://" + data['ip_address'] + ":27147/health?"
@@ -31,17 +25,14 @@ def requestThread(data, Queue):
                           'bifrostURL': bifrostURL, 'healthURL': healthUrl}
             Queue.put(dataReturn)
         except Exception as e:
-            #catch all exceptions from this thread and return without writing to the queue, results in data not
-            #being updated for this node.
             return
 
 
 def biFrostGrabDataAndSaveToDB():
-    """
-    biFrostGrabDataAndSaveToDB used to update rpc and bifrost info in thornode_monitor
-    """
     responseQueue = Queue()
     currentDBData = (grabQuery('SELECT * FROM noderunner.thornode_monitor'))
+    fullAddrList = [x['node_address'] for x in currentDBData]
+    currentAddrList = []
     threads = list()
     for node in currentDBData:
         # print("create and start thread ", str(index))
@@ -59,8 +50,28 @@ def biFrostGrabDataAndSaveToDB():
 
     while not responseQueue.empty():
         resp = responseQueue.get()
+        currentAddrList.append(resp['node_address'])
+        if len(resp['rpc']['result'] == 0):
+            query = "UPDATE noderunner.thornode_monitor SET " \
+                    "rpc = '{rpc}', bifrost = '{bifrost}' " \
+                    "WHERE (node_address = '{address}');".format(rpc=json.dumps(resp['rpc']),bifrost=resp['bifrost'],address=resp['node_address'])
+
+            commitQuery(query)
+        else:
+            #rpc has an error so report as bad
+            query = "UPDATE noderunner.thornode_monitor SET " \
+                    "rpc = '{rpc}', bifrost = '{bifrost}' " \
+                    "WHERE (node_address = '{address}');".format(rpc="null", bifrost=resp['bifrost'],
+                                                                 address=resp['node_address'])
+
+            commitQuery(query)
+
+    newList = list(set(fullAddrList).symmetric_difference(set(currentAddrList)))
+
+    for node in newList:
         query = "UPDATE noderunner.thornode_monitor SET " \
                 "rpc = '{rpc}', bifrost = '{bifrost}' " \
-                "WHERE (node_address = '{address}');".format(rpc=json.dumps(resp['rpc']),bifrost=resp['bifrost'],address=resp['node_address'])
+                "WHERE (node_address = '{address}');".format(rpc="null", bifrost="null",
+                                                             address=node)
 
         commitQuery(query)
