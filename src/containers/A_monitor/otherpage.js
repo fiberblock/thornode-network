@@ -4,7 +4,7 @@ import Modals from '@iso/components/Feedback/Modal';
 import Popover from '@iso/components/uielements/popover';
 import { getData, setCookie, getCookie } from 'CommonFunctions'
 import { ModalContent } from '../Feedback/Modal/Modal.styles';
-import { Layout, Button, Input, Modal, Switch, Breadcrumb } from 'antd';
+import { Layout, Button, Input, Breadcrumb, Select } from 'antd';
 import "./styles.css";
 import { Link } from 'react-router-dom';
 import { PUBLIC_ROUTE } from '../../route.constants';
@@ -51,7 +51,6 @@ import activeIcon from '@iso/assets/images/overview/active_icon.svg';
 
 
 import VisibleColumn from '@iso/components/VisibleColumn/VisibleColumn';
-
 const leaveIcon = <svg style={{marginTop: 5}} focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="20" height="20" viewBox="0 0 30 30" aria-hidden="true" className="sfg"><path d="M6,30H18a2.0023,2.0023,0,0,0,2-2V25H18v3H6V4H18V7h2V4a2.0023,2.0023,0,0,0-2-2H6A2.0023,2.0023,0,0,0,4,4V28A2.0023,2.0023,0,0,0,6,30Z"></path><path d="M20.586 20.586L24.172 17 10 17 10 15 24.172 15 20.586 11.414 22 10 28 16 22 22 20.586 20.586z"></path></svg>
 
 const { Header, Footer, Content } = Layout;
@@ -293,10 +292,8 @@ const BondProviderPopOver = ({data}) => {
 }
 
 const NodeTable = ({nodeData, clickSortHeader, sortColour, maxChainHeights, chains, addToFav, whichHeart, visibleColumns = {...defaulColumns}}) => {
-
-
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 20;
+  const [itemsPerPage, setItemsPerPage] = useState(25);
 
   const totalPages = Math.ceil(nodeData.length / itemsPerPage);
   const pageNumbers = [];
@@ -342,99 +339,124 @@ const NodeTable = ({nodeData, clickSortHeader, sortColour, maxChainHeights, chai
     return visibleColumns && visibleColumns[key] ? '' : 'hidden'
   };
 
-  return (
+  const updatePagingItem = (value) => {
+    setItemsPerPage(value)
+  };
+  return (<>
+  <div className='item-to-show'>
+    <span>Nodes per page:</span>
+
+    <Select
+      defaultValue={itemsPerPage}
+      showSearch={false}
+      onChange={updatePagingItem}
+      style={{ width: 100, borderRadius: 10 }}
+      dropdownMatchSelectWidth={false}
+      options={[
+        { value: '10', label: '10' },
+        { value: '25', label: '25' },
+        { value: '50', label: '50' },
+        { value: '100', label: '100'},
+      ]}
+    />
+    </div>
     <div className='data-table-wrapper'>
-    <table style={{borderWidth: 1.1, borderColor: 'rgba(0,0,0,1)', width: '100%'}}>
-      <thead>
-        <tr style={{borderStyle: 'solid', borderWidth: 1.1, borderColor: 'rgba(0,0,0,1)', color: 'black', textAlign: 'right', marginRight: 10}}>
-          <th className={getHeaderClassName('nodes')} style={{...headerStyle, color: sortColour('node_address'), textAlign: 'left', minWidth: 120}}><span onClick={()=>clickSortHeader('node_address')}>Validator Nodes</span></th>
-          <th className={getHeaderClassName('age')} style={{...headerStyle, color: sortColour('age'), textAlign: 'left', minWidth: 90}}><span onClick={()=>clickSortHeader('age')}>Age</span></th>
-          <th className={getHeaderClassName('action')} style={{...headerStyle, color: sortColour('action'), textAlign: 'center', minWidth: 145}}><span onClick={()=>clickSortHeader('action')}>Action</span></th>
-          <th className={getHeaderClassName('isp')} style={{...headerStyle, color: sortColour('isp'), textAlign: 'center', minWidth: 50}}><span onClick={()=>clickSortHeader('isp')}>ISP</span></th>
-          <th className="tableHeader" style={{...headerStyle, color: sortColour('location'), textAlign: 'left', minWidth: 160}}><span onClick={()=>clickSortHeader('location')}>Location</span></th>
-          <th className={getHeaderClassName('bond')} style={{...headerStyle, color: sortColour('bond'), minWidth: 90}}><span onClick={()=>clickSortHeader('bond')}>Bond</span></th>
-          <th className={getHeaderClassName('providers')} style={{...headerStyle, color: sortColour('bond_providers'), textAlign: 'center', minWidth: 110}}><span onClick={()=>clickSortHeader('bond_providers')}>Providers</span></th>
-          <th className={getHeaderClassName('rewards')} style={{...headerStyle, color: sortColour('current_award'), textAlign: 'left'}}><span onClick={()=>clickSortHeader('current_award')}>Rewards</span></th>
-          <th className={getHeaderClassName('apy')} style={{...headerStyle, color: sortColour('apy')}}><span onClick={()=>clickSortHeader('apy')}>APY</span></th>
-          <th className={getHeaderClassName('slashes')} style={{...headerStyle, color: sortColour('slash_points'), textAlign: 'center'}}><span onClick={()=>clickSortHeader('slash_points')}>Slashes</span></th>
-          <th className={getHeaderClassName('score')} style={{...headerStyle, color: sortColour('score')}}><span onClick={()=>clickSortHeader('score')}>Score</span></th>
-          <th className={getHeaderClassName('version')} style={{...headerStyle, color: sortColour('version')}}><span onClick={()=>clickSortHeader('version')}>Version</span></th>
-          <th className={getHeaderClassName('rpc')} style={{...headerStyle, textAlign: 'center'}}>RPC</th>
-          <th className={getHeaderClassName('bfr')} style={{...headerStyle, textAlign: 'center'}}>BFR</th>
+      <div style={{width: '100%', overflowX: 'auto'}}>
+        <table style={{borderWidth: 1.1, borderColor: 'rgba(0,0,0,1)', width: '100%'}}>
+          <thead>
+            <tr style={{borderStyle: 'solid', borderWidth: 1.1, borderColor: 'rgba(0,0,0,1)', color: 'black', textAlign: 'right', marginRight: 10}}>
+              <th className={getHeaderClassName('nodes')} style={{...headerStyle, color: sortColour('node_address'), textAlign: 'left', minWidth: 120}}><span onClick={()=>clickSortHeader('node_address')}>Validator Nodes</span></th>
+              <th className={getHeaderClassName('age')} style={{...headerStyle, color: sortColour('age'), textAlign: 'left', minWidth: 90}}><span onClick={()=>clickSortHeader('age')}>Age</span></th>
+              <th className={getHeaderClassName('action')} style={{...headerStyle, color: sortColour('action'), textAlign: 'center', minWidth: 100}}><span onClick={()=>clickSortHeader('action')}>Action</span></th>
+              <th className={getHeaderClassName('isp')} style={{...headerStyle, color: sortColour('isp'), textAlign: 'center', minWidth: 50}}><span onClick={()=>clickSortHeader('isp')}>ISP</span></th>
+              <th className="tableHeader" style={{...headerStyle, color: sortColour('location'), textAlign: 'left', minWidth: 160}}><span onClick={()=>clickSortHeader('location')}>Location</span></th>
+              <th className={getHeaderClassName('bond')} style={{...headerStyle, color: sortColour('bond'), minWidth: 90}}><span onClick={()=>clickSortHeader('bond')}>Bond</span></th>
+              <th className={getHeaderClassName('providers')} style={{...headerStyle, color: sortColour('bond_providers'), textAlign: 'center', minWidth: 110}}><span onClick={()=>clickSortHeader('bond_providers')}>Providers</span></th>
+              <th className={getHeaderClassName('rewards')} style={{...headerStyle, color: sortColour('current_award'), textAlign: 'left'}}><span onClick={()=>clickSortHeader('current_award')}>Rewards</span></th>
+              <th className={getHeaderClassName('apy')} style={{...headerStyle, color: sortColour('apy')}}><span onClick={()=>clickSortHeader('apy')}>APY</span></th>
+              <th className={getHeaderClassName('slashes')} style={{...headerStyle, color: sortColour('slash_points'), textAlign: 'center'}}><span onClick={()=>clickSortHeader('slash_points')}>Slashes</span></th>
+              <th className={getHeaderClassName('score')} style={{...headerStyle, color: sortColour('score')}}><span onClick={()=>clickSortHeader('score')}>Score</span></th>
+              <th className={getHeaderClassName('version')} style={{...headerStyle, color: sortColour('version')}}><span onClick={()=>clickSortHeader('version')}>Version</span></th>
+              <th className="tableHeader" style={{...headerStyle, color: sortColour('leave'), textAlign: 'center'}}><span onClick={()=>clickSortHeader('leave')}>{leaveIcon}</span></th>
+              <th className={getHeaderClassName('rpc')} style={{...headerStyle, textAlign: 'center'}}>RPC</th>
+              <th className={getHeaderClassName('bfr')} style={{...headerStyle, textAlign: 'center'}}>BFR</th>
 
-          {chains &&
-            <>
-              <th className="tableHeader" style={{...headerStyle, ...iconStyle}}><img alt="#" src={binance} style={{width: 25, height: 25, display: 'block', margin: 'auto'}}/></th>
-              <th className="tableHeader" style={{...headerStyle, ...iconStyle}}><img alt="#" src={bitcoin} style={{width: 25, height: 25, display: 'block', margin: 'auto'}}/></th>
-              <th className="tableHeader" style={{...headerStyle, ...iconStyle}}><img alt="#" src={eth} style={{width: 25, height: 25, display: 'block', margin: 'auto'}}/></th>
-              <th className="tableHeader" style={{...headerStyle, ...iconStyle}}><img alt="#" src={litecoin} style={{width: 25, height: 25, display: 'block', margin: 'auto'}}/></th>
-              <th className="tableHeader" style={{...headerStyle, ...iconStyle}}><img alt="#" src={bitcoincash} style={{width: 25, height: 25, display: 'block', margin: 'auto'}}/></th>
-              <th className="tableHeader" style={{...headerStyle, ...iconStyle}}><img alt="#" src={dogecoin} style={{width: 25, height: 25, display: 'block', margin: 'auto'}}/></th>
-              <th className="tableHeader" style={{...headerStyle, ...iconStyle}}><img alt="#" src={gaia} style={{width: 25, height: 25, display: 'block', margin: 'auto'}}/></th>
-            </>
-          }
-        </tr>
-      </thead>
-      <tbody>
-      {currentItems.map((item, index) => (
-        <tr key={index} style={{...trStyle}}>
-          <td className={getCellClassName('nodes')} style={{...tdStyle, textAlign: 'left', width: 220}}>
-            <Popover
-              content={item.node_address}
-              title={'Thornode Address'}
-              trigger="hover"
-            >
-            <span style={{cursor: 'pointer'}} className="nodeaddress" onClick={()=>copyToClipWithPopup('Node address copied to clipboard:', item.node_address)}>
-              {`${item.node_address.substring(0, Math.min(9, item.node_address.length))}...`}
-            </span>
-            </Popover>
-            <Icons address={item.node_address} ip_address={item.ip_address} addToFav={addToFav} whichHeart={whichHeart}/>
-          </td>
-          <td className={getCellClassName('age')} style={{...tdStyle, textAlign: 'left'}}>{item.age.toFixed(2)}</td>
-          <td className={getCellClassName('action')} style={{...tdStyle, textAlign: 'center', fontSize: 12}}>{item.action}</td>
-          <td className={getCellClassName('isp')} style={{...tdStyle, textAlign: 'center'}}>
-            <Popover
-              content={item.isp}
-              title={'Provider'}
-              trigger="hover"
-            >
-              <span style={{cursor: 'pointer'}}><ReturnIspImage isp={item.isp}/></span>
-            </Popover>
-          </td>
-          <td style={{...tdStyle, textAlign: 'left', fontSize: 12}}>{item.location}</td>
-          <td className={getCellClassName('bond')} style={tdStyle}>ᚱ{parseInt((item.bond/100000000).toFixed()).toLocaleString()}</td>
-          <td className={getCellClassName('providers')} style={{...tdStyle, textAlign: 'center'}}> <Popover
-                        content={<BondProviderPopOver data={item.bond_providers.providers}/>}
-                        title={'Bond Providers'}
-                        trigger="hover"
-                      ><span style={{cursor: 'pointer'}}>{item.bond_providers.providers.length}</span>
+              {chains &&
+                <>
+                  <th className="tableHeader" style={{...headerStyle, ...iconStyle}}><img alt="#" src={binance} style={{width: 25, height: 25, display: 'block', margin: 'auto'}}/></th>
+                  <th className="tableHeader" style={{...headerStyle, ...iconStyle}}><img alt="#" src={bitcoin} style={{width: 25, height: 25, display: 'block', margin: 'auto'}}/></th>
+                  <th className="tableHeader" style={{...headerStyle, ...iconStyle}}><img alt="#" src={eth} style={{width: 25, height: 25, display: 'block', margin: 'auto'}}/></th>
+                  <th className="tableHeader" style={{...headerStyle, ...iconStyle}}><img alt="#" src={litecoin} style={{width: 25, height: 25, display: 'block', margin: 'auto'}}/></th>
+                  <th className="tableHeader" style={{...headerStyle, ...iconStyle}}><img alt="#" src={bitcoincash} style={{width: 25, height: 25, display: 'block', margin: 'auto'}}/></th>
+                  <th className="tableHeader" style={{...headerStyle, ...iconStyle}}><img alt="#" src={dogecoin} style={{width: 25, height: 25, display: 'block', margin: 'auto'}}/></th>
+                  <th className="tableHeader" style={{...headerStyle, ...iconStyle}}><img alt="#" src={gaia} style={{width: 25, height: 25, display: 'block', margin: 'auto'}}/></th>
+                </>
+              }
+            </tr>
+          </thead>
+          <tbody>
+          {currentItems.map((item, index) => (
+            <tr key={index} style={{...trStyle}}>
+              <td className={getCellClassName('nodes')} style={{...tdStyle, textAlign: 'left', minWidth: 200}}>
+                <Popover
+                  content={item.node_address}
+                  title={'Thornode Address'}
+                  trigger="hover"
+                >
+                <span style={{cursor: 'pointer'}} className="nodeaddress" onClick={()=>copyToClipWithPopup('Node address copied to clipboard:', item.node_address)}>
+                  {/* {`${item.node_address.substring(0, Math.min(9, item.node_address.length))}...`} */}
+                  {`...${item.node_address.substring(item.node_address.length - 5)}`}
+
+                </span>
                 </Popover>
-            </td>
-          <td className={getCellClassName('rewards')} style={{...tdStyle, textAlign: 'left'}}>ᚱ{parseInt((item.current_award/100000000).toFixed()).toLocaleString()}</td>
-          <td className={getCellClassName('apy')} style={tdStyle}>{item.apy}</td>
-          <td className={getCellClassName('slashes')} style={{...tdStyle, textAlign: 'center'}}>{parseInt(item.slash_points).toLocaleString()}</td>
-          <td className={getCellClassName('score')} style={tdStyle}>{item.score}</td>
-          <td className={getCellClassName('version')} style={tdStyle}>{item.version}</td>
-          {/* <td className={getCellClassName('rpc')} style={{...tdStyle, textAlign: 'center'}}><a style={{color: 'rgba(0,0,0,0.85)'}} href={`http://${item.ip_address}:27147/health?`} target="_blank" rel="noopener noreferrer">{item.rpc === 'true' ? '*' : 'BAD'}</a></td> */}
-          <td className={getCellClassName('rpc')} style={{...tdStyle, textAlign: 'center'}}><a style={{color: 'rgba(0,0,0,0.85)'}} href={`http://${item.ip_address}:27147/health?`} target="_blank" rel="noopener noreferrer">{item.rpc !== null ? 'Good' : 'Bad'}</a></td>
-          <td className={getCellClassName('bfr')} style={{...tdStyle, textAlign: 'center'}}><a style={{color: 'rgba(0,0,0,0.85)'}} href={`http://${item.ip_address}:6040/p2pid`} target="_blank" rel="noopener noreferrer">{item.bifrost !== null ? 'Good' : 'Bad' }</a></td>
-
-          {chains &&
-            <>
-              <ChainTD chain={'BNB'} obchains={item.obchains} maxChainHeights={maxChainHeights} />
-              <ChainTD chain={'BTC'} obchains={item.obchains} maxChainHeights={maxChainHeights} />
-              <ChainTD chain={'ETH'} obchains={item.obchains} maxChainHeights={maxChainHeights} />
-              <ChainTD chain={'LTC'} obchains={item.obchains} maxChainHeights={maxChainHeights} />
-              <ChainTD chain={'BCH'} obchains={item.obchains} maxChainHeights={maxChainHeights} />
-              <ChainTD chain={'DOGE'} obchains={item.obchains} maxChainHeights={maxChainHeights} />
-              <ChainTD chain={'GAIA'} obchains={item.obchains} maxChainHeights={maxChainHeights} />
-            </>
-          }
-       </tr>
-      ))}
-      </tbody>
-    </table>
-
+                <Icons address={item.node_address} ip_address={item.ip_address} addToFav={addToFav} whichHeart={whichHeart}/>
+              </td>
+              <td className={getCellClassName('age')} style={{...tdStyle, textAlign: 'left'}}>{item.age.toFixed(2)}</td>
+              <td className={getCellClassName('action')} style={{...tdStyle, textAlign: 'center', fontSize: 12}}>{item.action}</td>
+              <td className={getCellClassName('isp')} style={{...tdStyle, textAlign: 'center'}}>
+                <Popover
+                  content={item.isp}
+                  title={'Provider'}
+                  trigger="hover"
+                >
+                  <span style={{cursor: 'pointer'}}><ReturnIspImage isp={item.isp}/></span>
+                </Popover>
+              </td>
+              <td style={{...tdStyle, textAlign: 'left', fontSize: 12}}>{item.location}</td>
+              <td className={getCellClassName('bond')} style={tdStyle}>ᚱ{parseInt((item.bond/100000000).toFixed()).toLocaleString()}</td>
+              <td className={getCellClassName('providers')} style={{...tdStyle, textAlign: 'center'}}> <Popover
+                            content={<BondProviderPopOver data={item.bond_providers.providers}/>}
+                            title={'Bond Providers'}
+                            trigger="hover"
+                          ><span style={{cursor: 'pointer'}}>{item.bond_providers.providers.length}</span>
+                    </Popover>
+                </td>
+              <td className={getCellClassName('rewards')} style={{...tdStyle, textAlign: 'left'}}>ᚱ{parseInt((item.current_award/100000000).toFixed()).toLocaleString()}</td>
+              <td className={getCellClassName('apy')} style={tdStyle}>{item.apy}</td>
+              <td className={getCellClassName('slashes')} style={{...tdStyle, textAlign: 'center'}}>{parseInt(item.slash_points).toLocaleString()}</td>
+              <td className={getCellClassName('score')} style={tdStyle}>{item.score}</td>
+              <td className={getCellClassName('version')} style={tdStyle}>{item.version}</td>
+              {/* <td className={getCellClassName('rpc')} style={{...tdStyle, textAlign: 'center'}}><a style={{color: 'rgba(0,0,0,0.85)'}} href={`http://${item.ip_address}:27147/health?`} target="_blank" rel="noopener noreferrer">{item.rpc === 'true' ? '*' : 'BAD'}</a></td> */}
+              <td style={{...tdStyle, textAlign: 'center'}}>{item.forced_to_leave === 1 || item.requested_to_leave === 1 ? 'yes' : '-'}</td>
+              <td className={getCellClassName('rpc')} style={{...tdStyle, textAlign: 'center'}}><a style={{color: 'rgba(0,0,0,0.85)'}} href={`http://${item.ip_address}:27147/health?`} target="_blank" rel="noopener noreferrer">{item.rpc !== null ? 'Good' : 'Bad'}</a></td>
+              <td className={getCellClassName('bfr')} style={{...tdStyle, textAlign: 'center'}}><a style={{color: 'rgba(0,0,0,0.85)'}} href={`http://${item.ip_address}:6040/p2pid`} target="_blank" rel="noopener noreferrer">{item.bifrost !== null ? 'Good' : 'Bad' }</a></td>
+                
+              {chains &&
+                <>
+                  <ChainTD chain={'BNB'} obchains={item.obchains} maxChainHeights={maxChainHeights} />
+                  <ChainTD chain={'BTC'} obchains={item.obchains} maxChainHeights={maxChainHeights} />
+                  <ChainTD chain={'ETH'} obchains={item.obchains} maxChainHeights={maxChainHeights} />
+                  <ChainTD chain={'LTC'} obchains={item.obchains} maxChainHeights={maxChainHeights} />
+                  <ChainTD chain={'BCH'} obchains={item.obchains} maxChainHeights={maxChainHeights} />
+                  <ChainTD chain={'DOGE'} obchains={item.obchains} maxChainHeights={maxChainHeights} />
+                  <ChainTD chain={'GAIA'} obchains={item.obchains} maxChainHeights={maxChainHeights} />
+                </>
+              }
+          </tr>
+          ))}
+          </tbody>
+        </table>
+      </div>
     <div className='paging-wrapper'>
       <ul className='page-numbers'>
         <li onClick={handlePrev} className={`nav-button nav-button--prev ${currentPage === 1 ? "disabled" : null}`}><LeftOutlined /></li>
@@ -443,6 +465,7 @@ const NodeTable = ({nodeData, clickSortHeader, sortColour, maxChainHeights, chai
       </ul>
     </div>
     </div>
+    </>
   )
 }
 
