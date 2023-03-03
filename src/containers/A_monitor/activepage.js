@@ -346,7 +346,7 @@ const NodeTable = ({nodeData, clickSortHeader, sortColour, maxChainHeights, chai
       defaultValue={itemsPerPage}
       showSearch={false}
       onChange={updatePagingItem}
-      style={{ width: 100, borderRadius: 10 }}
+      style={{ width: 80, borderRadius: 10 }}
       dropdownMatchSelectWidth={false}
       options={[
         { value: '10', label: '10' },
