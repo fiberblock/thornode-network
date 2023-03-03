@@ -528,10 +528,9 @@ tr:first-child {
 .item-to-show  {
   padding: 20px 0;
 }
-/* .item-to-show .ant-select-dropdown  {
-  min-width: none !important;
-  width: 70px !important;
-} */
+.item-to-show .ant-select-selector  {
+  border-radius: 6px !important;
+}
 
 .item-to-show > span {
   font-weight: 600;
