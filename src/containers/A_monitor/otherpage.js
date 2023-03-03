@@ -834,7 +834,7 @@ We use string sort function if value is one of the arrays else do second sort nu
 
               <Breadcrumb separator={<RightOutlined />}>
                 <Breadcrumb.Item href="/">Dashboard</Breadcrumb.Item>
-                <Breadcrumb.Item className='current'>Standby Nodes</Breadcrumb.Item>
+                <Breadcrumb.Item className='current'>Other Nodes</Breadcrumb.Item>
               </Breadcrumb>
 
               <div className='overview-list-wrapper'>
@@ -861,7 +861,7 @@ We use string sort function if value is one of the arrays else do second sort nu
                   )}
                   {whitelistedNodes.length === 0 && (
                     <div className='no-data'>
-                    <div className='no-data__content'>No Active Data Available!</div>
+                    <div className='no-data__content'>No Other Data Available!</div>
                   </div>
                   )}
                 </>

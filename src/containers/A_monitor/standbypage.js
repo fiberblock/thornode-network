@@ -846,7 +846,7 @@ We use string sort function if value is one of the arrays else do second sort nu
                   )}
                   {standByNodes.length === 0 && (
                     <div className='no-data'>
-                    <div className='no-data__content'>No Active Data Available!</div>
+                    <div className='no-data__content'>No Standby Data Available!</div>
                   </div>
                   )}
                 </>
