@@ -95,7 +95,7 @@ def cleanUpDB():
         return False
 
     toRemoveString = "'"+"', '".join(removeList)+"'"
-    query = "DELETE FROM noderunner.thornode_monitor where node_address IN {feild}".format(
+    query = "DELETE FROM noderunner.thornode_monitor where node_address IN {field}".format(
         field=toRemoveString)
 
     commitQuery(query)
