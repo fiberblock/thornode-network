@@ -386,7 +386,7 @@ const NodeTable = ({nodeData, clickSortHeader, sortColour, maxChainHeights, chai
           <tbody>
           {currentItems.map((item, index) => (
             <tr key={index} style={{...trStyle}}>
-              <td style={{backgroundColor: 'rgba(24, 34, 51, 0.4)',  minWidth: 35, paddingLeft: 5}}>{index+1}</td>
+              <td style={{backgroundColor: 'rgba(24, 34, 51, 0.4)',  minWidth: 40, paddingLeft: 5}}>{index+1}</td>
               <td className={getCellClassName('nodes')} style={{...tdStyle, textAlign: 'left', minWidth: 200}}>
                 <Popover
                   content={item.node_address}
@@ -394,7 +394,6 @@ const NodeTable = ({nodeData, clickSortHeader, sortColour, maxChainHeights, chai
                   trigger="hover"
                 >
                 <span style={{cursor: 'pointer'}} className="nodeaddress" onClick={()=>copyToClipWithPopup('Node address copied to clipboard:', item.node_address)}>
-                  {/* {`${item.node_address.substring(0, Math.min(9, item.node_address.length))}...`} */}
                   {`...${item.node_address.substring(item.node_address.length - 5)}`}
 
                 </span>
