@@ -386,7 +386,7 @@ const NodeTable = ({nodeData, clickSortHeader, sortColour, maxChainHeights, chai
           <tbody>
           {currentItems.map((item, index) => (
             <tr key={index} style={{...trStyle}}>
-              <td style={{backgroundColor: 'rgba(24, 34, 51, 0.4)',  minWidth: 40, paddingLeft: 5}}>{index+1}</td>
+              <td style={{backgroundColor: 'rgba(24, 34, 51, 0.4)',  minWidth: 35, width: 50, paddingLeft: 5}}>{index+1}</td>
               <td className={getCellClassName('nodes')} style={{...tdStyle, textAlign: 'left', minWidth: 200}}>
                 <Popover
                   content={item.node_address}
