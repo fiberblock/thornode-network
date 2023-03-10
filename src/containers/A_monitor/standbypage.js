@@ -443,6 +443,7 @@ const NodeTable = ({nodeData, clickSortHeader, sortColour, maxChainHeights, chai
               }
           </tr>
           ))}
+          <tr><td></td></tr>
           </tbody>
         </table>
       </div>
