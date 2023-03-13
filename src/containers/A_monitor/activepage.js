@@ -361,6 +361,7 @@ const NodeTable = ({nodeData, clickSortHeader, sortColour, maxChainHeights, chai
         <table style={{borderWidth: 1.1, borderColor: 'rgba(0,0,0,1)', width: '100%'}}>
           <thead>
             <tr style={{borderStyle: 'solid', borderWidth: 1.1, borderColor: 'rgba(0,0,0,1)', color: 'black', textAlign: 'right', marginRight: 10}}>
+              <th style={{backgroundColor: 'rgba(24, 34, 51, 0.4)'}}></th>
               <th className={getHeaderClassName('nodes')} style={{...headerStyle, color: sortColour('node_address'), textAlign: 'left', minWidth: 120}}><span onClick={()=>clickSortHeader('node_address')}>Validator Nodes</span></th>
               <th className={getHeaderClassName('age')} style={{...headerStyle, color: sortColour('age'), textAlign: 'left', minWidth: 90}}><span onClick={()=>clickSortHeader('age')}>Age</span></th>
               <th className={getHeaderClassName('action')} style={{...headerStyle, color: sortColour('action'), textAlign: 'center', minWidth: 100}}><span onClick={()=>clickSortHeader('action')}>Action</span></th>
@@ -393,6 +394,7 @@ const NodeTable = ({nodeData, clickSortHeader, sortColour, maxChainHeights, chai
           <tbody>
           {currentItems.map((item, index) => (
             <tr key={index} style={{...trStyle}}>
+              <td style={{backgroundColor: 'rgba(24, 34, 51, 0.4)',  minWidth: 35, width: 50, paddingLeft: 5}}>{index+1}</td>
               <td className={getCellClassName('nodes')} style={{...tdStyle, textAlign: 'left', minWidth: 200}}>
                 <Popover
                   content={item.node_address}
@@ -400,7 +402,6 @@ const NodeTable = ({nodeData, clickSortHeader, sortColour, maxChainHeights, chai
                   trigger="hover"
                 >
                 <span style={{cursor: 'pointer'}} className="nodeaddress" onClick={()=>copyToClipWithPopup('Node address copied to clipboard:', item.node_address)}>
-                  {/* {`${item.node_address.substring(0, Math.min(9, item.node_address.length))}...`} */}
                   {`...${item.node_address.substring(item.node_address.length - 5)}`}
 
                 </span>
@@ -450,6 +451,7 @@ const NodeTable = ({nodeData, clickSortHeader, sortColour, maxChainHeights, chai
               }
           </tr>
           ))}
+          <tr><td></td></tr>
           </tbody>
         </table>
       </div>
