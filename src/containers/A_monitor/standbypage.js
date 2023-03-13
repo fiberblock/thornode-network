@@ -14,6 +14,13 @@ import imageGCP from '@iso/assets/images/gcp.png';
 import imageAZURE from '@iso/assets/images/azure.png';
 import imageHETZNER from '@iso/assets/images/hetzner.png';
 import imageVULTR from '@iso/assets/images/vultr.png';
+import imageLeaseweb from '@iso/assets/images/leaseweb.png';
+import imageDatacamp from '@iso/assets/images/datacamp.png';
+import imageComcast from '@iso/assets/images/comcast.png';
+import imageChoopa from '@iso/assets/images/choopa.png';
+import imageChartercoms from '@iso/assets/images/chartercoms.png';
+import imageATandT from '@iso/assets/images/atandt.png';
+
 import binance from '@iso/assets/images/binance.png';
 import eth from '@iso/assets/images/eth.png';
 import bitcoin from '@iso/assets/images/bitcoin.png';
@@ -253,6 +260,29 @@ const ReturnIspImage = ({isp}) => {
     return <img alt="#" src={imageVULTR} style={style}/>
   }
 
+  if (isp ==='Leaseweb UK Limited'){
+    return <img alt="#" src={imageLeaseweb} style={style}/>
+  }
+
+  if (isp ==='Datacamp Limited'){
+    return <img alt="#" src={imageDatacamp} style={style}/>
+  }
+
+  if (isp ==='Comcast Cable Communications, LLC'){
+    return <img alt="#" src={imageComcast} style={style}/>
+  }
+
+  if (isp ==='Choopa'){
+    return <img alt="#" src={imageChoopa} style={style}/>
+  }
+
+  if (isp ==='Charter Communications Inc'){
+    return <img alt="#" src={imageChartercoms} style={style}/>
+  }
+
+  if (isp ==='AT&T Services, Inc.'){
+    return <img alt="#" src={imageATandT} style={style}/>
+  }
 
   return '-'
 }
