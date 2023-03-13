@@ -289,7 +289,7 @@ const BondProviderPopOver = ({data}) => {
 
 const NodeTable = ({nodeData, clickSortHeader, sortColour, maxChainHeights, chains, addToFav, whichHeart, visibleColumns = {...defaulColumns}}) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(25);
+  const [itemsPerPage, setItemsPerPage] = useState(100);
 
   const totalPages = Math.ceil(nodeData.length / itemsPerPage);
   const pageNumbers = [];
@@ -402,7 +402,7 @@ const NodeTable = ({nodeData, clickSortHeader, sortColour, maxChainHeights, chai
                   trigger="hover"
                 >
                 <span style={{cursor: 'pointer'}} className="nodeaddress" onClick={()=>copyToClipWithPopup('Node address copied to clipboard:', item.node_address)}>
-                  {`...${item.node_address.substring(item.node_address.length - 5)}`}
+                  {`...${item.node_address.substring(item.node_address.length - 4)}`}
 
                 </span>
                 </Popover>
