@@ -32,6 +32,7 @@ import imageComcast from '@iso/assets/images/comcast.png';
 import imageChoopa from '@iso/assets/images/choopa.png';
 import imageChartercoms from '@iso/assets/images/chartercoms.png';
 import imageATandT from '@iso/assets/images/atandt.png';
+import imageZenlayer from '@iso/assets/images/zenlayer.png';
 
 import binance from '@iso/assets/images/binance.png';
 import eth from '@iso/assets/images/eth.png';
@@ -309,6 +310,10 @@ const ReturnIspImage = ({isp}) => {
 
   if (isp ==='AT&T Services, Inc.'){
     return <img alt="#" src={imageATandT} style={style}/>
+  }
+  
+  if (isp ==='Zenlayer Inc'){
+    return <img alt="#" src={imageZenlayer} style={style}/>
   }
   
   return '-'
