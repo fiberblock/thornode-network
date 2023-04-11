@@ -863,7 +863,7 @@ We use string sort function if value is one of the arrays else do second sort nu
       <div className='search-input'>
       <Input
         style={{ width: 500, height: 46, borderRadius: 6, background: '#fff'}}
-        onChange={(event) => this.setState({ searchTerm: event.target.value.trim()},()=>this.setData())}
+        onChange={(event) => this.setState({ searchTerm: event.target.value.trim().toLowerCase()},()=>this.setData())}
         prefix={<SearchOutlined/>}
       />
       </div>
