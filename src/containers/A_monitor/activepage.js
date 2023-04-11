@@ -194,6 +194,13 @@ const GlobalData = ({ globalData, animateBlockCount, state}) => {
           <div className='overview-item__value-value'>${globalData?.coingecko?.total_volume?.toLocaleString()}</div>
         </div>
       </div>
+      <div className='overview-item'>
+        <img alt="#" src={bondIcon} className='overview-item__icon'/>
+        <div className='overview-item__value'>
+          <div className='overview-item__value-title'>MAX EFFECTIVE BOND</div>
+          <div className='overview-item__value-value'>ᚱ{parseInt(globalData.maxEffectiveStake/100000000).toLocaleString()}</div>
+        </div>
+      </div>
     </>
   )
 }

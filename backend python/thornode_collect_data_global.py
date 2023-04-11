@@ -158,5 +158,7 @@ def collectDataGlobal():
     # Clean up any old nodes from the database
     cleaned = cleanUpDB()
 
-    print(str(secondsPerBlock),str(getCoinGeckoInfo),str(lastChurn),str(retiringVault),str(cleaned))
+    maxBond = grabMaxEffectiveBond()
+
+    print(str(secondsPerBlock),str(getCoinGeckoInfo),str(lastChurn),str(retiringVault),str(cleaned), str(maxBond))
 
