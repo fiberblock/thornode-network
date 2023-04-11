@@ -279,7 +279,7 @@ const ReturnIspImage = ({isp}) => {
     return <img alt="#" src={imageVULTR} style={style}/>
   }
 
-  if (isp ==='Leaseweb UK Limited'){
+  if (isp ==='Leaseweb UK Limited' || isp === 'Leaseweb USA, Inc.'){
     return <img alt="#" src={imageLeaseweb} style={style}/>
   }
 
@@ -405,16 +405,16 @@ const NodeTable = ({nodeData, clickSortHeader, sortColour, maxChainHeights, chai
       <div style={{width: '100%', overflowX: 'auto'}}>
         <table style={{borderWidth: 1.1, borderColor: 'rgba(0,0,0,1)', width: '100%'}}>
           <thead>
-            <tr style={{borderStyle: 'solid', borderWidth: 1.1, borderColor: 'rgba(0,0,0,1)', color: 'black', textAlign: 'right', marginRight: 10}}>
+            <tr style={{borderStyle: 'solid', borderWidth: 1.1, borderColor: 'rgba(0,0,0,1)', color: 'black', textAlign: 'center', marginRight: 10}}>
               <th style={{backgroundColor: 'rgba(24, 34, 51, 0.4)'}}></th>
-              <th className={getHeaderClassName('nodes')} style={{...headerStyle, color: sortColour('node_address'), textAlign: 'left', minWidth: 120}}><span onClick={()=>clickSortHeader('node_address')}>Validator Nodes</span></th>
-              <th className={getHeaderClassName('age')} style={{...headerStyle, color: sortColour('age'), textAlign: 'left', minWidth: 90}}><span onClick={()=>clickSortHeader('age')}>Age</span></th>
+              <th className={getHeaderClassName('nodes')} style={{...headerStyle, color: sortColour('node_address'), textAlign: 'center', minWidth: 100}}><span onClick={()=>clickSortHeader('node_address')}>Validator Nodes</span></th>
+              <th className={getHeaderClassName('age')} style={{...headerStyle, color: sortColour('age'), textAlign: 'center', minWidth: 90}}><span onClick={()=>clickSortHeader('age')}>Age</span></th>
               <th className={getHeaderClassName('action')} style={{...headerStyle, color: sortColour('action'), textAlign: 'center', minWidth: 100}}><span onClick={()=>clickSortHeader('action')}>Action</span></th>
               <th className={getHeaderClassName('isp')} style={{...headerStyle, color: sortColour('isp'), textAlign: 'center', minWidth: 50}}><span onClick={()=>clickSortHeader('isp')}>ISP</span></th>
-              <th className="tableHeader" style={{...headerStyle, color: sortColour('location'), textAlign: 'left', minWidth: 160}}><span onClick={()=>clickSortHeader('location')}>Location</span></th>
-              <th className={getHeaderClassName('bond')} style={{...headerStyle, color: sortColour('bond'), minWidth: 90}}><span onClick={()=>clickSortHeader('bond')}>Bond</span></th>
+              <th className="tableHeader" style={{...headerStyle, color: sortColour('location'), textAlign: 'center', minWidth: 100}}><span onClick={()=>clickSortHeader('location')}>Location</span></th>
+              <th className={getHeaderClassName('bond')} style={{...headerStyle, color: sortColour('bond'), minWidth: 75}}><span onClick={()=>clickSortHeader('bond')}>Bond</span></th>
               <th className={getHeaderClassName('providers')} style={{...headerStyle, color: sortColour('bond_providers'), textAlign: 'center', minWidth: 110}}><span onClick={()=>clickSortHeader('bond_providers')}>Providers</span></th>
-              <th className={getHeaderClassName('rewards')} style={{...headerStyle, color: sortColour('current_award'), textAlign: 'left'}}><span onClick={()=>clickSortHeader('current_award')}>Rewards</span></th>
+              <th className={getHeaderClassName('rewards')} style={{...headerStyle, color: sortColour('current_award'), textAlign: 'center'}}><span onClick={()=>clickSortHeader('current_award')}>Rewards</span></th>
               <th className={getHeaderClassName('apy')} style={{...headerStyle, color: sortColour('apy')}}><span onClick={()=>clickSortHeader('apy')}>APY</span></th>
               <th className={getHeaderClassName('slashes')} style={{...headerStyle, color: sortColour('slash_points'), textAlign: 'center'}}><span onClick={()=>clickSortHeader('slash_points')}>Slashes</span></th>
               <th className={getHeaderClassName('score')} style={{...headerStyle, color: sortColour('score')}}><span onClick={()=>clickSortHeader('score')}>Score</span></th>
@@ -440,7 +440,7 @@ const NodeTable = ({nodeData, clickSortHeader, sortColour, maxChainHeights, chai
           {currentItems.map((item, index) => (
             <tr key={index} style={{...trStyle}}>
               <td style={{backgroundColor: 'rgba(24, 34, 51, 0.4)',  minWidth: 35, width: 50, paddingLeft: 5}}>{index+1}</td>
-              <td className={getCellClassName('nodes')} style={{...tdStyle, textAlign: 'left', minWidth: 200}}>
+              <td className={getCellClassName('nodes')} style={{...tdStyle, textAlign: 'center', minWidth: 195, maxWidth: 201}}>
                 <Popover
                   content={item.node_address}
                   title={'Thornode Address'}
@@ -453,7 +453,7 @@ const NodeTable = ({nodeData, clickSortHeader, sortColour, maxChainHeights, chai
                 </Popover>
                 <Icons address={item.node_address} ip_address={item.ip_address} addToFav={addToFav} whichHeart={whichHeart}/>
               </td>
-              <td className={getCellClassName('age')} style={{...tdStyle, textAlign: 'left'}}>{item.age.toFixed(2)}</td>
+              <td className={getCellClassName('age')} style={{...tdStyle, textAlign: 'center'}}>{item.age.toFixed(2)}</td>
               <td className={getCellClassName('action')} style={{...tdStyle, textAlign: 'center', fontSize: 12}}>{item.action}</td>
               <td className={getCellClassName('isp')} style={{...tdStyle, textAlign: 'center'}}>
                 <Popover
@@ -464,8 +464,8 @@ const NodeTable = ({nodeData, clickSortHeader, sortColour, maxChainHeights, chai
                   <span style={{cursor: 'pointer'}}><ReturnIspImage isp={item.isp}/></span>
                 </Popover>
               </td>
-              <td style={{...tdStyle, textAlign: 'left', fontSize: 12}}>{item.location}</td>
-              <td className={getCellClassName('bond')} style={tdStyle}>ᚱ{parseInt((item.bond/100000000).toFixed()).toLocaleString()}</td>
+              <td style={{...tdStyle, textAlign: 'center', fontSize: 12}}>{item.location}</td>
+              <td className={getCellClassName('bond')} style={{...tdStyle, textAlign: 'center'}}>ᚱ{parseInt((item.bond/100000000).toFixed()).toLocaleString()}</td>
               <td className={getCellClassName('providers')} style={{...tdStyle, textAlign: 'center'}}> <Popover
                             content={<BondProviderPopOver data={item.bond_providers.providers}/>}
                             title={'Bond Providers'}
@@ -473,11 +473,11 @@ const NodeTable = ({nodeData, clickSortHeader, sortColour, maxChainHeights, chai
                           ><span style={{cursor: 'pointer'}}>{item.bond_providers.providers.length}</span>
                     </Popover>
                 </td>
-              <td className={getCellClassName('rewards')} style={{...tdStyle, textAlign: 'left'}}>ᚱ{parseInt((item.current_award/100000000).toFixed()).toLocaleString()}</td>
-              <td className={getCellClassName('apy')} style={tdStyle}>{item.apy}</td>
+              <td className={getCellClassName('rewards')} style={{...tdStyle, textAlign: 'center'}}>ᚱ{parseInt((item.current_award/100000000).toFixed()).toLocaleString()}</td>
+              <td className={getCellClassName('apy')} style={{...tdStyle, textAlign: 'center'}}>{item.apy}</td>
               <td className={getCellClassName('slashes')} style={{...tdStyle, textAlign: 'center'}}>{parseInt(item.slash_points).toLocaleString()}</td>
-              <td className={getCellClassName('score')} style={tdStyle}>{item.score}</td>
-              <td className={getCellClassName('version')} style={tdStyle}>{item.version}</td>
+              <td className={getCellClassName('score')} style={{...tdStyle, textAlign: 'center'}}>{item.score}</td>
+              <td className={getCellClassName('version')} style={{...tdStyle, textAlign: 'center'}}>{item.version}</td>
               {/* <td className={getCellClassName('rpc')} style={{...tdStyle, textAlign: 'center'}}><a style={{color: 'rgba(0,0,0,0.85)'}} href={`http://${item.ip_address}:27147/health?`} target="_blank" rel="noopener noreferrer">{item.rpc === 'true' ? '*' : 'BAD'}</a></td> */}
               <td style={{...tdStyle, textAlign: 'center'}}>{item.forced_to_leave === 1 || item.requested_to_leave === 1 ? 'yes' : '-'}</td>
               <td className={getCellClassName('rpc')} style={{...tdStyle, textAlign: 'center'}}><a style={{color: 'rgba(0,0,0,0.85)'}} href={`http://${item.ip_address}:27147/health?`} target="_blank" rel="noopener noreferrer">{item.rpc !== "null" ? '*' : 'Bad'}</a></td>
