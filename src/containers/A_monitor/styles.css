@@ -41,8 +41,19 @@ td {
   color: #1C39BB
 }
 
+.tableHeader span{
+  position: relative;
+}
+
 .tableHeader:hover {
   color: #004d59
+}
+
+.tableHeader span .sort-icon{
+  position: absolute;
+  top: 50%;
+  right: -5px;
+  transform: translate(100%, -50%);
 }
 
 .overview-list-wrapper {

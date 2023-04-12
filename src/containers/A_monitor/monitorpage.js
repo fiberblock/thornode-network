@@ -63,6 +63,7 @@ import liquifyLogo from '@iso/assets/images/overview/liquify_logo.svg';
 import threeDotsIcon from '@iso/assets/images/overview/dots_three_circle.svg';
 import powerIcon from '@iso/assets/images/overview/power.svg';
 import activeIcon from '@iso/assets/images/overview/active_icon.svg';
+import sortIcon from '@iso/assets/images/overview/sort.svg';
 
 
 import VisibleColumn from '@iso/components/VisibleColumn/VisibleColumn';
@@ -104,6 +105,11 @@ function popUpModal(msg, ip) {
     cancelText: 'Cancel',
     className: 'feedback-modal'
   });
+}
+
+const SortIcon = ({sortBy, column}) => {
+  if (sortBy == column) return <img className='sort-icon' src={sortIcon} width={12}/>
+  return null
 }
 
 const Icons = ({address, ip_address, addToFav, whichHeart}) => {
@@ -347,7 +353,7 @@ const BondProviderPopOver = ({data}) => {
   return d
 }
 
-const NodeTable = ({nodeData, clickSortHeader, sortColour, maxChainHeights, chains, addToFav, whichHeart, visibleColumns = {...defaulColumns}}) => {
+const NodeTable = ({nodeData, clickSortHeader, sortColour, maxChainHeights, chains, addToFav, whichHeart, visibleColumns = {...defaulColumns}, sortBy = ''}) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(100);
 
@@ -422,19 +428,19 @@ const NodeTable = ({nodeData, clickSortHeader, sortColour, maxChainHeights, chai
           <thead>
             <tr style={{borderStyle: 'solid', borderWidth: 1.1, borderColor: 'rgba(0,0,0,1)', color: 'black', textAlign: 'center', marginRight: 10}}>
               <th style={{backgroundColor: 'rgba(24, 34, 51, 0.4)'}}></th>
-              <th className={getHeaderClassName('nodes')} style={{...headerStyle, color: sortColour('node_address'), textAlign: 'center', minWidth: 100}}><span onClick={()=>clickSortHeader('node_address')}>Validator Nodes</span></th>
-              <th className={getHeaderClassName('age')} style={{...headerStyle, color: sortColour('age'), textAlign: 'center', minWidth: 90}}><span onClick={()=>clickSortHeader('age')}>Age</span></th>
-              <th className={getHeaderClassName('action')} style={{...headerStyle, color: sortColour('action'), textAlign: 'center', minWidth: 100}}><span onClick={()=>clickSortHeader('action')}>Action</span></th>
-              <th className={getHeaderClassName('isp')} style={{...headerStyle, color: sortColour('isp'), textAlign: 'center', minWidth: 50}}><span onClick={()=>clickSortHeader('isp')}>ISP</span></th>
-              <th className="tableHeader" style={{...headerStyle, color: sortColour('location'), textAlign: 'center', minWidth: 100}}><span onClick={()=>clickSortHeader('location')}>Location</span></th>
-              <th className={getHeaderClassName('bond')} style={{...headerStyle, color: sortColour('bond'), minWidth: 75}}><span onClick={()=>clickSortHeader('bond')}>Bond</span></th>
-              <th className={getHeaderClassName('providers')} style={{...headerStyle, color: sortColour('bond_providers'), textAlign: 'center'}}><span onClick={()=>clickSortHeader('bond_providers')}>Providers</span></th>
-              <th className={getHeaderClassName('rewards')} style={{...headerStyle, color: sortColour('current_award'), textAlign: 'center'}}><span onClick={()=>clickSortHeader('current_award')}>Rewards</span></th>              
-              <th className={getHeaderClassName('apy')} style={{...headerStyle, color: sortColour('apy')}}><span onClick={()=>clickSortHeader('apy')}>APY</span></th>
-              <th className={getHeaderClassName('slashes')} style={{...headerStyle, color: sortColour('slash_points'), textAlign: 'center'}}><span onClick={()=>clickSortHeader('slash_points')}>Slashes</span></th>
-              <th className={getHeaderClassName('score')} style={{...headerStyle, color: sortColour('score')}}><span onClick={()=>clickSortHeader('score')}>Score</span></th>
-              <th className={getHeaderClassName('version')} style={{...headerStyle, color: sortColour('version')}}><span onClick={()=>clickSortHeader('version')}>Version</span></th>
-              <th className="tableHeader" style={{...headerStyle, color: sortColour('leave'), textAlign: 'center'}}><span onClick={()=>clickSortHeader('leave')}>{leaveIcon}</span></th>
+              <th className={getHeaderClassName('nodes')} style={{...headerStyle, color: sortColour('node_address'), textAlign: 'center', minWidth: 100}}><span onClick={()=>clickSortHeader('node_address')}>Validator Nodes<SortIcon column={'node_address'} sortBy={sortBy}/></span></th>
+              <th className={getHeaderClassName('age')} style={{...headerStyle, color: sortColour('age'), textAlign: 'center', minWidth: 90}}><span onClick={()=>clickSortHeader('age')}>Age<SortIcon column={'age'} sortBy={sortBy}/></span></th>
+              <th className={getHeaderClassName('action')} style={{...headerStyle, color: sortColour('action'), textAlign: 'center', minWidth: 100}}><span onClick={()=>clickSortHeader('action')}>Action<SortIcon column={'action'} sortBy={sortBy}/></span></th>
+              <th className={getHeaderClassName('isp')} style={{...headerStyle, color: sortColour('isp'), textAlign: 'center', minWidth: 50}}><span onClick={()=>clickSortHeader('isp')}>ISP<SortIcon column={'isp'} sortBy={sortBy}/></span></th>
+              <th className="tableHeader" style={{...headerStyle, color: sortColour('location'), textAlign: 'center', minWidth: 100}}><span onClick={()=>clickSortHeader('location')}>Location<SortIcon column={'location'} sortBy={sortBy}/></span></th>
+              <th className={getHeaderClassName('bond')} style={{...headerStyle, color: sortColour('bond'), minWidth: 75}}><span onClick={()=>clickSortHeader('bond')}>Bond<SortIcon column={'bond'} sortBy={sortBy}/></span></th>
+              <th className={getHeaderClassName('providers')} style={{...headerStyle, color: sortColour('bond_providers'), textAlign: 'center'}}><span onClick={()=>clickSortHeader('bond_providers')}>Providers<SortIcon column={'bond_providers'} sortBy={sortBy}/></span></th>
+              <th className={getHeaderClassName('rewards')} style={{...headerStyle, color: sortColour('current_award'), textAlign: 'center'}}><span onClick={()=>clickSortHeader('current_award')}>Rewards<SortIcon column={'current_award'} sortBy={sortBy}/></span></th>              
+              <th className={getHeaderClassName('apy')} style={{...headerStyle, color: sortColour('apy')}}><span onClick={()=>clickSortHeader('apy')}>APY<SortIcon column={'apy'} sortBy={sortBy}/></span></th>
+              <th className={getHeaderClassName('slashes')} style={{...headerStyle, color: sortColour('slash_points'), textAlign: 'center'}}><span onClick={()=>clickSortHeader('slash_points')}>Slashes<SortIcon column={'slash_points'} sortBy={sortBy}/></span></th>
+              <th className={getHeaderClassName('score')} style={{...headerStyle, color: sortColour('score')}}><span onClick={()=>clickSortHeader('score')}>Score<SortIcon column={'score'} sortBy={sortBy}/></span></th>
+              <th className={getHeaderClassName('version')} style={{...headerStyle, color: sortColour('version')}}><span onClick={()=>clickSortHeader('version')}>Version<SortIcon column={'version'} sortBy={sortBy}/></span></th>
+              <th className="tableHeader" style={{...headerStyle, color: sortColour('leave'), textAlign: 'center'}}><span onClick={()=>clickSortHeader('leave')}>{leaveIcon}<SortIcon column={'leave'} sortBy={sortBy}/></span></th>
               <th className={getHeaderClassName('rpc')} style={{...headerStyle, textAlign: 'center'}}>RPC</th>
               <th className={getHeaderClassName('bfr')} style={{...headerStyle, textAlign: 'center'}}>BFR</th>
 
@@ -585,7 +591,7 @@ export default class extends Component {
     }
 
     if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-        console.log('DEV ONLY: Refresh Data Results: ', data)
+        // console.log('DEV ONLY: Refresh Data Results: ', data)
     }
 
 
@@ -846,7 +852,11 @@ We use string sort function if value is one of the arrays else do second sort nu
 
   clickSortHeader(item){
     const direction = this.state.sortBy !== item ? 'desc' : this.state.sortDirection === 'desc' ? 'asc' : 'desc';
+    console.log(' ===============> : sortBy - sortDirection - direction :::  ', this.state.sortBy, this.state.sortDirection, direction);
     this.setState({sortBy: item, sortDirection: direction}, ()=> this.setData())
+    window.setTimeout(()=> {
+      console.log(' ===============> : ', this.state.sortBy);
+    }, 200)
   }
 
   sortColour(item) {
@@ -955,7 +965,7 @@ We use string sort function if value is one of the arrays else do second sort nu
                 </div>
 
                 {activeNodes.length > 0 && (
-                  <NodeTable visibleColumns={visibleColumns} whichHeart={this.whichHeart.bind(this)} addToFav={this.addToFav.bind(this)} nodeData={activeNodes} clickSortHeader={this.clickSortHeader.bind(this)} sortColour={this.sortColour.bind(this)} maxChainHeights={this.state.maxChainHeights} chains={true}/>
+                  <NodeTable visibleColumns={visibleColumns} whichHeart={this.whichHeart.bind(this)} addToFav={this.addToFav.bind(this)} nodeData={activeNodes} clickSortHeader={this.clickSortHeader.bind(this)} sortColour={this.sortColour.bind(this)} maxChainHeights={this.state.maxChainHeights} chains={true} sortBy={this.state.sortBy}/>
                 )}
                 {activeNodes.length === 0 && (
                   <div className='no-data'>
@@ -986,7 +996,7 @@ We use string sort function if value is one of the arrays else do second sort nu
                 </div>
 
                 {standByNodes.length > 0 && (
-                  <NodeTable visibleColumns={visibleColumns}  whichHeart={this.whichHeart.bind(this)}addToFav={this.addToFav.bind(this)} nodeData={standByNodes} clickSortHeader={this.clickSortHeader.bind(this)} sortColour={this.sortColour.bind(this)} maxChainHeights={this.state.maxChainHeights} chains={false}/>
+                  <NodeTable visibleColumns={visibleColumns}  whichHeart={this.whichHeart.bind(this)}addToFav={this.addToFav.bind(this)} nodeData={standByNodes} clickSortHeader={this.clickSortHeader.bind(this)} sortColour={this.sortColour.bind(this)} maxChainHeights={this.state.maxChainHeights} chains={false} sortBy={this.state.sortBy}/>
                 )}
                 {standByNodes.length === 0 && (
                   <div className='no-data'>
@@ -1016,7 +1026,7 @@ We use string sort function if value is one of the arrays else do second sort nu
                 </div>
 
                 {whitelistedNodes.length > 0 && (
-                  <NodeTable visibleColumns={visibleColumns}  whichHeart={this.whichHeart.bind(this)}addToFav={this.addToFav.bind(this)} nodeData={whitelistedNodes} clickSortHeader={this.clickSortHeader.bind(this)} sortColour={this.sortColour.bind(this)} maxChainHeights={this.state.maxChainHeights} chains={false}/>
+                  <NodeTable visibleColumns={visibleColumns}  whichHeart={this.whichHeart.bind(this)}addToFav={this.addToFav.bind(this)} nodeData={whitelistedNodes} clickSortHeader={this.clickSortHeader.bind(this)} sortColour={this.sortColour.bind(this)} maxChainHeights={this.state.maxChainHeights} chains={false} sortBy={this.state.sortBy}/>
                 )}
                 {whitelistedNodes.length === 0 && (
                   <div className='no-data'>
