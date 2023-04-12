@@ -26,6 +26,13 @@ import imageGCP from '@iso/assets/images/gcp.png';
 import imageAZURE from '@iso/assets/images/azure.png';
 import imageHETZNER from '@iso/assets/images/hetzner.png';
 import imageVULTR from '@iso/assets/images/vultr.png';
+import imageLeaseweb from '@iso/assets/images/leaseweb.png';
+import imageDatacamp from '@iso/assets/images/datacamp.png';
+import imageComcast from '@iso/assets/images/comcast.png';
+import imageChoopa from '@iso/assets/images/choopa.png';
+import imageChartercoms from '@iso/assets/images/chartercoms.png';
+import imageATandT from '@iso/assets/images/atandt.png';
+import imageZenlayer from '@iso/assets/images/zenlayer.png';
 
 import binance from '@iso/assets/images/binance.png';
 import eth from '@iso/assets/images/eth.png';
@@ -143,8 +150,7 @@ const Icons = ({address, ip_address, addToFav, whichHeart}) => {
         <span style={{cursor: 'pointer', marginLeft: 5}} onClick={()=>copyToClipWithPopup('IP Copied to clipboard:', ip_address)}>
           {/* <svg focusable="false" preserveAspectRatio="xMidYMid meet" style={{verticalAlign: 'middle'}} xmlns="http://www.w3.org/2000/svg" fill="rgba(0,0,0,0.7)" width="18" height="18" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2a8 8 0 108 8A8.0092 8.0092 0 0016 2zm5.91 7H19.4724a15.2457 15.2457 0 00-.7917-4.36A6.0088 6.0088 0 0121.91 9zM16.022 15.999h-.0076c-.3813-.1206-1.3091-1.8213-1.479-4.999h2.9292C17.2952 14.1763 16.3711 15.877 16.022 15.999zM14.5354 9c.1694-3.1763 1.0935-4.877 1.4426-4.999h.0076c.3813.1206 1.3091 1.8213 1.479 4.999zM13.3193 4.64A15.2457 15.2457 0 0012.5276 9H10.09A6.0088 6.0088 0 0113.3193 4.64zM10.09 11h2.4373a15.2457 15.2457 0 00.7917 4.36A6.0088 6.0088 0 0110.09 11zm8.59 4.36A15.2457 15.2457 0 0019.4724 11H21.91A6.0088 6.0088 0 0118.6807 15.36zM28 30H4a2.0021 2.0021 0 01-2-2V22a2.0021 2.0021 0 012-2H28a2.0021 2.0021 0 012 2v6A2.0021 2.0021 0 0128 30zM4 22v6H28V22z"></path><circle cx="7" cy="25" r="1"></circle></svg> */}
           <svg focusable="false" preserveAspectRatio="xMidYMid meet" style={{verticalAlign: 'middle'}} width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M10.2916 1.08301H5.95831C5.81465 1.08301 5.67688 1.14008 5.5753 1.24166C5.47371 1.34324 5.41665 1.48102 5.41665 1.62467C5.41665 1.76833 5.47371 1.90611 5.5753 2.00769C5.67688 2.10927 5.81465 2.16634 5.95831 2.16634H10.2916C10.4353 2.16634 10.5731 2.22341 10.6747 2.32499C10.7762 2.42657 10.8333 2.56435 10.8333 2.70801V6.49967H1.62498C1.48132 6.49967 1.34355 6.55674 1.24196 6.65833C1.14038 6.75991 1.08331 6.89768 1.08331 7.04134V8.12467C1.08331 8.55565 1.25452 8.96898 1.55926 9.27372C1.86401 9.57847 2.27734 9.74967 2.70831 9.74967H4.33331V10.833H2.70831C2.56465 10.833 2.42688 10.8901 2.3253 10.9917C2.22371 11.0932 2.16665 11.231 2.16665 11.3747C2.16665 11.5183 2.22371 11.6561 2.3253 11.7577C2.42688 11.8593 2.56465 11.9163 2.70831 11.9163H10.2916C10.4353 11.9163 10.5731 11.8593 10.6747 11.7577C10.7762 11.6561 10.8333 11.5183 10.8333 11.3747C10.8333 11.231 10.7762 11.0932 10.6747 10.9917C10.5731 10.8901 10.4353 10.833 10.2916 10.833H8.66665V9.74967H10.2916C10.7226 9.74967 11.1359 9.57847 11.4407 9.27372C11.7454 8.96898 11.9166 8.55565 11.9166 8.12467V2.70801C11.9166 2.27703 11.7454 1.86371 11.4407 1.55896C11.1359 1.25421 10.7226 1.08301 10.2916 1.08301ZM7.58331 10.833H5.41665V9.74967H7.58331V10.833ZM10.8333 8.12467C10.8333 8.26833 10.7762 8.40611 10.6747 8.50769C10.5731 8.60927 10.4353 8.66634 10.2916 8.66634H2.70831C2.56465 8.66634 2.42688 8.60927 2.3253 8.50769C2.22371 8.40611 2.16665 8.26833 2.16665 8.12467V7.58301H10.8333V8.12467Z" fill="currentColor"/>
-            <path d="M3.9044 3.30042L2.78573 4.75234L1.66706 3.30042C1.36512 2.90853 1.36759 2.45798 1.57491 2.09161C1.78501 1.72031 2.21379 1.42871 2.78573 1.42871C3.35767 1.42871 3.78646 1.72031 3.99656 2.09161C4.20388 2.45798 4.20634 2.90853 3.9044 3.30042Z" stroke="currentColor"/>
+            <path d="M10.2916 1.08301H5.95831C5.81465 1.08301 5.67688 1.14008 5.5753 1.24166C5.47371 1.34324 5.41665 1.48102 5.41665 1.62467C5.41665 1.76833 5.47371 1.90611 5.5753 2.00769C5.67688 2.10927 5.81465 2.16634 5.95831 2.16634H10.2916C10.4353 2.16634 10.5731 2.22341 10.6747 2.32499C10.7762 2.42657 10.8333 2.56435 10.8333 2.70801V6.49967H1.62498C1.48132 6.49967 1.34355 6.55674 1.24196 6.65833C1.14038 6.75991 1.08331 6.89768 1.08331 7.04134V8.12467C1.08331 8.55565 1.25452 8.96898 1.55926 9.27372C1.86401 9.57847 2.27734 9.74967 2.70831 9.74967H4.33331V10.833H2.70831C2.56465 10.833 2.42688 10.8901 2.3253 10.9917C2.22371 11.0932 2.16665 11.231 2.16665 11.3747C2.16665 11.5183 2.22371 11.6561 2.3253 11.7577C2.42688 11.8593 2.56465 11.9163 2.70831 11.9163H10.2916C10.4353 11.9163 10.5731 11.8593 10.6747 11.7577C10.7762 11.6561 10.8333 11.5183 10.8333 11.3747C10.8333 11.231 10.7762 11.0932 10.6747 10.9917C10.5731 10.8901 10.4353 10.833 10.2916 10.833H8.66665V9.74967H10.2916C10.7226 9.74967 11.1359 9.57847 11.4407 9.27372C11.7454 8.96898 11.9166 8.55565 11.9166 8.12467V2.70801C11.9166 2.27703 11.7454 1.86371 11.4407 1.55896C11.1359 1.25421 10.7226 1.08301 10.2916 1.08301ZM7.58331 10.833H5.41665V9.74967H7.58331V10.833ZM10.8333 8.12467C10.8333 8.26833 10.7762 8.40611 10.6747 8.50769C10.5731 8.60927 10.4353 8.66634 10.2916 8.66634H2.70831C2.56465 8.66634 2.42688 8.60927 2.3253 8.50769C2.22371 8.40611 2.16665 8.26833 2.16665 8.12467V7.58301H10.8333V8.12467Z" fill="currentColor"/>            <path d="M3.9044 3.30042L2.78573 4.75234L1.66706 3.30042C1.36512 2.90853 1.36759 2.45798 1.57491 2.09161C1.78501 1.72031 2.21379 1.42871 2.78573 1.42871C3.35767 1.42871 3.78646 1.72031 3.99656 2.09161C4.20388 2.45798 4.20634 2.90853 3.9044 3.30042Z" stroke="currentColor"/>
             <path d="M1.85712 5.57129H3.71426" stroke="currentColor" stroke-linecap="round"/>
           </svg>
         </span>
@@ -206,6 +212,13 @@ const GlobalData = ({ globalData, animateBlockCount, state}) => {
         <div className='overview-item__value'>
           <div className='overview-item__value-title'>24 HR VOLUME</div>
           <div className='overview-item__value-value'>${globalData?.coingecko?.total_volume?.toLocaleString()}</div>
+        </div>
+      </div>
+      <div className='overview-item'>
+        <img alt="#" src={bondIcon} className='overview-item__icon'/>
+        <div className='overview-item__value'>
+          <div className='overview-item__value-title'>MAX EFFECTIVE BOND</div>
+          <div className='overview-item__value-value'>ᚱ{parseInt(globalData.maxEffectiveStake/100000000).toLocaleString()}</div>
         </div>
       </div>
     </>
@@ -281,6 +294,33 @@ const ReturnIspImage = ({isp}) => {
     return <img alt="#" src={imageVULTR} style={style}/>
   }
 
+  if (isp ==='Leaseweb UK Limited' || isp === 'Leaseweb USA, Inc.'){
+    return <img alt="#" src={imageLeaseweb} style={style}/>
+  }
+
+  if (isp ==='Datacamp Limited'){
+    return <img alt="#" src={imageDatacamp} style={style}/>
+  }
+
+  if (isp ==='Comcast Cable Communications, LLC'){
+    return <img alt="#" src={imageComcast} style={style}/>
+  }
+
+  if (isp ==='Choopa'){
+    return <img alt="#" src={imageChoopa} style={style}/>
+  }
+
+  if (isp ==='Charter Communications Inc'){
+    return <img alt="#" src={imageChartercoms} style={style}/>
+  }
+
+  if (isp ==='AT&T Services, Inc.'){
+    return <img alt="#" src={imageATandT} style={style}/>
+  }
+  
+  if (isp ==='Zenlayer Inc'){
+    return <img alt="#" src={imageZenlayer} style={style}/>
+  }
   
   return '-'
 }
@@ -309,7 +349,7 @@ const BondProviderPopOver = ({data}) => {
 
 const NodeTable = ({nodeData, clickSortHeader, sortColour, maxChainHeights, chains, addToFav, whichHeart, visibleColumns = {...defaulColumns}}) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [itemsPerPage, setItemsPerPage] = useState(100);
 
   const totalPages = Math.ceil(nodeData.length / itemsPerPage);
   const pageNumbers = [];
@@ -380,16 +420,16 @@ const NodeTable = ({nodeData, clickSortHeader, sortColour, maxChainHeights, chai
       <div style={{width: '100%', overflowX: 'auto'}}>
         <table style={{borderWidth: 1.1, borderColor: 'rgba(0,0,0,1)', width: '100%'}}>
           <thead>
-            <tr style={{borderStyle: 'solid', borderWidth: 1.1, borderColor: 'rgba(0,0,0,1)', color: 'black', textAlign: 'right', marginRight: 10}}>
+            <tr style={{borderStyle: 'solid', borderWidth: 1.1, borderColor: 'rgba(0,0,0,1)', color: 'black', textAlign: 'center', marginRight: 10}}>
               <th style={{backgroundColor: 'rgba(24, 34, 51, 0.4)'}}></th>
-              <th className={getHeaderClassName('nodes')} style={{...headerStyle, color: sortColour('node_address'), textAlign: 'left', minWidth: 120}}><span onClick={()=>clickSortHeader('node_address')}>Validator Nodes</span></th>
-              <th className={getHeaderClassName('age')} style={{...headerStyle, color: sortColour('age'), textAlign: 'left', minWidth: 90}}><span onClick={()=>clickSortHeader('age')}>Age</span></th>
+              <th className={getHeaderClassName('nodes')} style={{...headerStyle, color: sortColour('node_address'), textAlign: 'center', minWidth: 100}}><span onClick={()=>clickSortHeader('node_address')}>Validator Nodes</span></th>
+              <th className={getHeaderClassName('age')} style={{...headerStyle, color: sortColour('age'), textAlign: 'center', minWidth: 90}}><span onClick={()=>clickSortHeader('age')}>Age</span></th>
               <th className={getHeaderClassName('action')} style={{...headerStyle, color: sortColour('action'), textAlign: 'center', minWidth: 100}}><span onClick={()=>clickSortHeader('action')}>Action</span></th>
               <th className={getHeaderClassName('isp')} style={{...headerStyle, color: sortColour('isp'), textAlign: 'center', minWidth: 50}}><span onClick={()=>clickSortHeader('isp')}>ISP</span></th>
-              <th className="tableHeader" style={{...headerStyle, color: sortColour('location'), textAlign: 'left', minWidth: 160}}><span onClick={()=>clickSortHeader('location')}>Location</span></th>
-              <th className={getHeaderClassName('bond')} style={{...headerStyle, color: sortColour('bond'), minWidth: 90}}><span onClick={()=>clickSortHeader('bond')}>Bond</span></th>
-              <th className={getHeaderClassName('providers')} style={{...headerStyle, color: sortColour('bond_providers'), textAlign: 'center', minWidth: 110}}><span onClick={()=>clickSortHeader('bond_providers')}>Providers</span></th>
-              <th className={getHeaderClassName('rewards')} style={{...headerStyle, color: sortColour('current_award'), textAlign: 'left'}}><span onClick={()=>clickSortHeader('current_award')}>Rewards</span></th>
+              <th className="tableHeader" style={{...headerStyle, color: sortColour('location'), textAlign: 'center', minWidth: 100}}><span onClick={()=>clickSortHeader('location')}>Location</span></th>
+              <th className={getHeaderClassName('bond')} style={{...headerStyle, color: sortColour('bond'), minWidth: 75}}><span onClick={()=>clickSortHeader('bond')}>Bond</span></th>
+              <th className={getHeaderClassName('providers')} style={{...headerStyle, color: sortColour('bond_providers'), textAlign: 'center'}}><span onClick={()=>clickSortHeader('bond_providers')}>Providers</span></th>
+              <th className={getHeaderClassName('rewards')} style={{...headerStyle, color: sortColour('current_award'), textAlign: 'center'}}><span onClick={()=>clickSortHeader('current_award')}>Rewards</span></th>              
               <th className={getHeaderClassName('apy')} style={{...headerStyle, color: sortColour('apy')}}><span onClick={()=>clickSortHeader('apy')}>APY</span></th>
               <th className={getHeaderClassName('slashes')} style={{...headerStyle, color: sortColour('slash_points'), textAlign: 'center'}}><span onClick={()=>clickSortHeader('slash_points')}>Slashes</span></th>
               <th className={getHeaderClassName('score')} style={{...headerStyle, color: sortColour('score')}}><span onClick={()=>clickSortHeader('score')}>Score</span></th>
@@ -414,21 +454,21 @@ const NodeTable = ({nodeData, clickSortHeader, sortColour, maxChainHeights, chai
           <tbody>
           {currentItems.map((item, index) => (
             <tr key={index} style={{...trStyle}}>
-              <td style={{backgroundColor: 'rgba(24, 34, 51, 0.4)',  minWidth: 35, width: 50, paddingLeft: 5}}>{index+1}</td>
-              <td className={getCellClassName('nodes')} style={{...tdStyle, textAlign: 'left', minWidth: 200}}>
+              <td style={{backgroundColor: 'rgba(24, 34, 51, 0.4)',  minWidth: 35, width: 50, paddingLeft: 3, textAlign: 'center'}}>{index+1}</td>
+              <td className={getCellClassName('nodes')} style={{...tdStyle, textAlign: 'center', minWidth: 195, maxWidth: 201}}>
                 <Popover
                   content={item.node_address}
                   title={'Thornode Address'}
                   trigger="hover"
                 >
                 <span style={{cursor: 'pointer'}} className="nodeaddress" onClick={()=>copyToClipWithPopup('Node address copied to clipboard:', item.node_address)}>
-                  {`...${item.node_address.substring(item.node_address.length - 5)}`}
+                  {`...${item.node_address.substring(item.node_address.length - 4)}`}
 
                 </span>
                 </Popover>
                 <Icons address={item.node_address} ip_address={item.ip_address} addToFav={addToFav} whichHeart={whichHeart}/>
               </td>
-              <td className={getCellClassName('age')} style={{...tdStyle, textAlign: 'left'}}>{item.age.toFixed(2)}</td>
+              <td className={getCellClassName('age')} style={{...tdStyle, textAlign: 'center'}}>{item.age.toFixed(2)}</td>
               <td className={getCellClassName('action')} style={{...tdStyle, textAlign: 'center', fontSize: 12}}>{item.action}</td>
               <td className={getCellClassName('isp')} style={{...tdStyle, textAlign: 'center'}}>
                 <Popover
@@ -439,8 +479,8 @@ const NodeTable = ({nodeData, clickSortHeader, sortColour, maxChainHeights, chai
                   <span style={{cursor: 'pointer'}}><ReturnIspImage isp={item.isp}/></span>
                 </Popover>
               </td>
-              <td style={{...tdStyle, textAlign: 'left', fontSize: 12}}>{item.location}</td>
-              <td className={getCellClassName('bond')} style={tdStyle}>ᚱ{parseInt((item.bond/100000000).toFixed()).toLocaleString()}</td>
+              <td style={{...tdStyle, textAlign: 'center', fontSize: 12}}>{item.location}</td>
+              <td className={getCellClassName('bond')} style={{tdStyle, textAlign: 'center'}}>ᚱ{parseInt((item.bond/100000000).toFixed()).toLocaleString()}</td>
               <td className={getCellClassName('providers')} style={{...tdStyle, textAlign: 'center'}}> <Popover
                             content={<BondProviderPopOver data={item.bond_providers.providers}/>}
                             title={'Bond Providers'}
@@ -448,11 +488,11 @@ const NodeTable = ({nodeData, clickSortHeader, sortColour, maxChainHeights, chai
                           ><span style={{cursor: 'pointer'}}>{item.bond_providers.providers.length}</span>
                     </Popover>
                 </td>
-              <td className={getCellClassName('rewards')} style={{...tdStyle, textAlign: 'left'}}>ᚱ{parseInt((item.current_award/100000000).toFixed()).toLocaleString()}</td>
-              <td className={getCellClassName('apy')} style={tdStyle}>{item.apy}</td>
+              <td className={getCellClassName('rewards')} style={{...tdStyle, textAlign: 'center'}}>ᚱ{parseInt((item.current_award/100000000).toFixed()).toLocaleString()}</td>
+              <td className={getCellClassName('apy')} style={{...tdStyle, textAlign: 'center'}}>{item.apy}</td>
               <td className={getCellClassName('slashes')} style={{...tdStyle, textAlign: 'center'}}>{parseInt(item.slash_points).toLocaleString()}</td>
-              <td className={getCellClassName('score')} style={tdStyle}>{item.score}</td>
-              <td className={getCellClassName('version')} style={tdStyle}>{item.version}</td>
+              <td className={getCellClassName('score')} style={{...tdStyle, textAlign: 'center'}}>{item.score}</td>
+              <td className={getCellClassName('version')} style={{...tdStyle, textAlign: 'center'}}>{item.version}</td>
               {/* <td className={getCellClassName('rpc')} style={{...tdStyle, textAlign: 'center'}}><a style={{color: 'rgba(0,0,0,0.85)'}} href={`http://${item.ip_address}:27147/health?`} target="_blank" rel="noopener noreferrer">{item.rpc === 'true' ? '*' : 'BAD'}</a></td> */}
               <td style={{...tdStyle, textAlign: 'center'}}>{item.forced_to_leave === 1 || item.requested_to_leave === 1 ? 'yes' : '-'}</td>
               <td className={getCellClassName('rpc')} style={{...tdStyle, textAlign: 'center'}}><a style={{color: 'rgba(0,0,0,0.85)'}} href={`http://${item.ip_address}:27147/health?`} target="_blank" rel="noopener noreferrer">{item.rpc !== "null" ? '*' : 'Bad'}</a></td>
@@ -823,7 +863,7 @@ We use string sort function if value is one of the arrays else do second sort nu
       <div className='search-input'>
       <Input
         style={{ width: 500, height: 46, borderRadius: 6, background: '#fff'}}
-        onChange={(event) => this.setState({ searchTerm: event.target.value.trim()},()=>this.setData())}
+        onChange={(event) => this.setState({ searchTerm: event.target.value.trim().toLowerCase()},()=>this.setData())}
         prefix={<SearchOutlined/>}
       />
       </div>

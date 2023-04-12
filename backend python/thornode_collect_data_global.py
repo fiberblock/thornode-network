@@ -1,8 +1,6 @@
-import time
-
 import requests
 import json
-import random
+import math
 import datetime
 from common import getDB, commitQuery, grabQuery
 
@@ -75,6 +73,21 @@ def checkRetiringVaults():
     commitQuery(query)
     return areWeRetiring
 
+def grabMaxEffectiveBond():
+    """
+        grabMaxEffectiveStake used to calculate and update the max effective bond
+
+        :return maxBond: returns the current maxEffectiveBond
+    """
+    response_API = requests.get('https://thornode.ninerealms.com/thorchain/nodes')
+    data = json.loads(response_API.text)
+    nodes = sorted([int(x['total_bond']) for x in data if "Active" == x['status']])
+    position = math.ceil((len(nodes)+1)*2/3)
+    maxBond = nodes[position]
+    query = "UPDATE noderunner.thornode_monitor_global SET maxEffectiveStake = '{field}' WHERE primary_key = 1;".format(field=int(maxBond))
+    commitQuery(query)
+    return maxBond
+
 def cleanUpDB():
     """
     cleanUpDB purges our DB of nodes they are no longer present
@@ -145,5 +158,7 @@ def collectDataGlobal():
     # Clean up any old nodes from the database
     cleaned = cleanUpDB()
 
-    print(str(secondsPerBlock),str(getCoinGeckoInfo),str(lastChurn),str(retiringVault),str(cleaned))
+    maxBond = grabMaxEffectiveBond()
+
+    print(str(secondsPerBlock),str(getCoinGeckoInfo),str(lastChurn),str(retiringVault),str(cleaned), str(maxBond))
 
