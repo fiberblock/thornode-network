@@ -89,9 +89,8 @@ function popUpModal(msg, ip) {
 }
 
 const SortIcon = ({ sortBy, column, sortDirection }) => {
-  const direction = sortBy !== column ? 'asc' : sortDirection === 'asc' ? 'desc' : 'asc';
   if (sortBy == column) {
-    return <img className={`sort-icon ${direction}`} src={arrowDownIcon} width={12} />
+    return <img className={`sort-icon ${sortDirection}`} src={arrowDownIcon} width={12} />
   }
   return null
 }

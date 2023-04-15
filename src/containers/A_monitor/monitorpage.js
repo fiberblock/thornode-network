@@ -108,9 +108,8 @@ function popUpModal(msg, ip) {
 }
 
 const SortIcon = ({ sortBy, column, sortDirection }) => {
-  const direction = sortBy !== column ? 'asc' : sortDirection === 'asc' ? 'desc' : 'asc';
   if (sortBy == column) {
-    return <img className={`sort-icon ${direction}`} src={arrowDownIcon} width={12} />
+    return <img className={`sort-icon ${sortDirection}`} src={arrowDownIcon} width={12} />
   }
   return null
 }
@@ -855,10 +854,8 @@ We use string sort function if value is one of the arrays else do second sort nu
 
   clickSortHeader(item){
     const direction = this.state.sortBy !== item ? 'desc' : this.state.sortDirection === 'desc' ? 'asc' : 'desc';
-    console.log(' ===============> : sortBy - sortDirection - direction :::  ', this.state.sortBy, this.state.sortDirection, direction);
     this.setState({sortBy: item, sortDirection: direction}, ()=> this.setData())
     window.setTimeout(()=> {
-      console.log(' ===============> : ', this.state.sortBy);
     }, 200)
   }
 
