@@ -53,7 +53,12 @@ td {
   position: absolute;
   top: 50%;
   right: -5px;
-  transform: translate(100%, -50%);
+}
+.tableHeader span .sort-icon.desc{
+  transform: translate(100%, -50%) rotate(0deg);
+}
+.tableHeader span .sort-icon.asc{
+  transform: translate(100%, -50%) rotate(180deg);
 }
 
 .overview-list-wrapper {
